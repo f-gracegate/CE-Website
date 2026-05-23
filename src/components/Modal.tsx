@@ -41,22 +41,22 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: "spring", damping: 25, stiffness: 350 }}
-            className="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-rose-100 bg-white shadow-2xl ring-1 ring-[#8a1e25]/10"
+            className="relative z-10 w-full max-w-lg overflow-hidden rounded-[24px] border border-white/60 bg-[#f4eae2] shadow-neu-flat"
           >
             {/* Top Glow bar */}
-            <div className="h-1 w-full bg-gradient-to-r from-church-burgundy via-church-rose to-church-burgundy" />
+            <div className="h-1.5 w-full bg-gradient-to-r from-church-burgundy via-church-rose to-church-burgundy" />
 
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-rose-50 px-6 py-4">
-              <h3 className="font-display text-xl font-bold tracking-tight text-slate-900">
+            <div className="flex items-center justify-between border-b border-white/30 px-6 py-4">
+              <h3 className="font-display text-sm font-black uppercase tracking-widest text-slate-900">
                 {title}
               </h3>
               <button
                 onClick={onClose}
-                className="rounded-lg p-1 text-slate-500 hover:bg-rose-50 hover:text-church-burgundy transition-colors"
+                className="rounded-xl p-2.5 text-slate-600 bg-[#f4eae2] border border-white/50 hover:text-church-burgundy transition-all shadow-neu-flat-sm active:scale-95 cursor-pointer"
                 aria-label="Close modal"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               </button>
             </div>
 

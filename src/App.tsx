@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CHURCH_LOCATIONS } from "./data";
 import { CommunityMember, ChurchLocation } from "./types";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import WhoWeAre from "./components/WhoWeAre";
@@ -25,6 +25,13 @@ import {
 } from "lucide-react";
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   const [selectedLocation, setSelectedLocation] = useState<string>("All Campuses");
   const [activeModal, setActiveModal] = useState<"locations" | "give" | "search" | "groupSignUp" | null>(null);
   const [selectedMember, setSelectedMember] = useState<CommunityMember | null>(null);
@@ -104,8 +111,14 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#EDE6E2] text-slate-800 antialiased selection:bg-church-rose/25 selection:text-church-burgundy leading-normal scroll-smooth">
+    <div className="min-h-screen flex flex-col bg-[#f4eae2] text-slate-800 antialiased selection:bg-church-rose/25 selection:text-church-burgundy leading-normal scroll-smooth">
       
+      {/* FIXED TOP SCROLL PROGRESS INDICATOR */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-church-burgundy origin-left z-[9999] shadow-[0_1px_5px_rgba(138,30,37,0.4)] pointer-events-none"
+        style={{ scaleX }}
+      />
+
       {/* WOODSIDE MAIN NAVIGATION BAR */}
       <Header 
         onOpenModal={(type) => setActiveModal(type)} 
@@ -116,27 +129,6 @@ export default function App() {
       <HeroSection 
         onOpenModal={(type) => setActiveModal(type)} 
       />
-
-      {/* BRIEF LOGOS/ACCENTS PANEL (inspired by Screenshot 4 "Trusted by Teams") */}
-      <div className="bg-[#F5EFEB] border-y border-[#DCD3CC] py-8 px-4 text-center">
-        <p className="font-mono text-[9px] uppercase tracking-widest text-[#8a1e25] font-black">
-          Affiliated Evangelical Missions and Fellowships
-        </p>
-        <div className="mt-4 flex flex-wrap justify-center items-center gap-x-12 gap-y-4 opacity-70 hover:opacity-100 transition-opacity">
-          <span className="font-display text-xs tracking-wider text-slate-800 hover:text-church-burgundy transition-colors uppercase font-extrabold">
-            ✦ Westminster Theological Council
-          </span>
-          <span className="font-display text-xs tracking-wider text-slate-800 hover:text-church-burgundy transition-colors uppercase font-extrabold">
-            ✦ Sovereign Grace Network
-          </span>
-          <span className="font-display text-xs tracking-wider text-slate-800 hover:text-church-burgundy transition-colors uppercase font-extrabold">
-            ✦ Global Feeding Alliance
-          </span>
-          <span className="font-display text-xs tracking-wider text-slate-800 hover:text-church-burgundy transition-colors uppercase font-extrabold">
-            ✦ NextGen Bible Guild
-          </span>
-        </div>
-      </div>
 
       {/* WOODSIDE LIGHT SECTIONS: WHO WE ARE | FIND BELONGING | SPREAD HOPE */}
       <main className="flex-grow">

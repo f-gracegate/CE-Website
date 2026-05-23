@@ -30,7 +30,7 @@ export default function ModernFooter() {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-[#FAF8F6] to-[#DFD6D1] py-16 px-4 sm:px-6 lg:px-8 font-sans border-t border-[#E0D5CF]">
+    <footer className="relative bg-[#f4eae2] py-16 px-4 sm:px-6 lg:px-8 font-sans border-t border-white/50">
       
       {/* Footer Container */}
       <div className="mx-auto max-w-7xl">
@@ -57,18 +57,18 @@ export default function ModernFooter() {
               {/* White Pill Input and Burgundy Subscribe Button */}
               <form onSubmit={handleSubscribe} className="mt-8 w-full max-w-md">
                 {!isSubscribed ? (
-                  <div className="flex items-center gap-2 bg-white rounded-full p-1.5 shadow-md shadow-rose-950/5 border border-rose-100 focus-within:ring-2 focus-within:ring-church-burgundy/20 transition-all">
+                  <div className="flex items-center gap-2 bg-[#f4eae2] rounded-full p-2.5 shadow-neu-inset border border-white/60 focus-within:border-white transition-all">
                     <input
                       type="email"
                       required
                       placeholder="Your Email."
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-transparent pl-4 pr-2 py-2 text-xs md:text-sm text-slate-800 outline-none placeholder-slate-400"
+                      className="w-full bg-transparent pl-4 pr-2 py-2 text-xs md:text-sm text-slate-800 outline-none placeholder-slate-400 font-bold"
                     />
                     <button
                       type="submit"
-                      className="rounded-full bg-church-burgundy hover:bg-[#a1232c] px-5 py-2.5 text-xs font-bold text-white transition-all shadow-sm active:scale-95 whitespace-nowrap border-none cursor-pointer margin-0"
+                      className="rounded-full bg-church-burgundy hover:bg-[#a1232c] px-6 py-3 text-xs font-black uppercase tracking-wider text-white transition-all shadow-neu-flat-sm hover:shadow-neu-flat active:scale-95 whitespace-nowrap border-none cursor-pointer margin-0"
                     >
                       Subscribe
                     </button>
@@ -77,7 +77,7 @@ export default function ModernFooter() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="flex items-center gap-2.5 rounded-full bg-rose-50 border border-rose-100 p-3 text-church-burgundy text-xs font-semibold shadow-xs"
+                    className="flex items-center gap-2.5 rounded-full bg-[#f4eae2] border border-white/60 p-4 text-church-burgundy text-xs font-bold shadow-neu-inset"
                   >
                     <CheckCircle className="h-4 w-4 shrink-0 text-church-burgundy" />
                     <span>Roster saved. We'll send you Sunday sermon digests!</span>
@@ -100,7 +100,7 @@ export default function ModernFooter() {
                     key={idx}
                     href="#"
                     aria-label={soc.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white border border-rose-100 text-slate-600 hover:text-church-burgundy hover:bg-rose-50 hover:border-church-burgundy/60 transition-all shadow-xs"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4eae2] border border-white/60 text-slate-700 hover:text-church-burgundy hover:scale-105 transition-all shadow-neu-flat-sm"
                   >
                     <Icon className="h-4 w-4" />
                   </a>
@@ -111,10 +111,10 @@ export default function ModernFooter() {
           </div>
 
           {/* 📍 CENTRAL DIVIDER WALL */}
-          <div className="hidden lg:block lg:col-span-1 w-[1px] h-full bg-rose-200/50 mx-auto" />
+          <div className="hidden lg:block lg:col-span-1 w-[1px] h-full bg-white/30 mx-auto" />
 
           {/* RIGHT PANEL: Structured sermon & faith directories */}
-          <div className="lg:col-span-5 grid grid-cols-2 gap-8 pt-8 lg:pt-0 pl-0 lg:pl-6 text-left">
+          <div className="lg:col-span-12 md:col-span-5 grid grid-cols-2 gap-8 pt-8 lg:pt-0 pl-0 lg:pl-6 text-left lg:col-span-5">
             
             {/* Navigations links */}
             <div>
@@ -171,10 +171,10 @@ export default function ModernFooter() {
         </div>
 
         {/* BOTTOM SUBBAR */}
-        <div className="mt-16 pt-8 border-t border-rose-200/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-8 border-t border-white/30 flex flex-col sm:flex-row items-center justify-between gap-4">
           
           {/* Copyright left */}
-          <span className="text-[11px] text-slate-500 font-sans">
+          <span className="text-[11px] text-slate-500 font-sans font-medium">
             @2026 Charismatic Evangelicals. All rights reserved.
           </span>
 
@@ -183,14 +183,14 @@ export default function ModernFooter() {
             {[
               { label: "VISA", bg: "bg-[#1a1f71] text-white" },
               { label: "MC", bg: "bg-[#f79e1b] text-white font-serif italic" },
-              { label: "AMEX", bg: "bg-[#0170ce] text-white" },
+              { label: "AMEX", bg: "bg-[#0170ce] text-white font-mono" },
               { label: "PAYPAL", bg: "bg-[#003087] text-white font-bold" },
               { label: "APPLE", bg: "bg-black text-white" },
               { label: "DISCOVER", bg: "bg-[#f05a28] text-white" }
             ].map((card, cidx) => (
               <span 
                 key={cidx}
-                className={`text-[8px] font-black tracking-widest px-2 py-1 rounded border border-rose-200 shadow-2xs select-none ${card.bg}`}
+                className={`text-[8px] font-black tracking-widest px-2.5 py-1.5 rounded-lg border border-white/60 shadow-neu-flat-sm select-none ${card.bg}`}
               >
                 {card.label}
               </span>

@@ -18,7 +18,8 @@ import {
   Check, 
   Navigation,
   Loader2,
-  AlertCircle
+  AlertCircle,
+  Printer
 } from "lucide-react";
 import { googleSignIn, initAuth, logout, isMockAuth } from "../lib/auth";
 
@@ -100,6 +101,97 @@ const BASE_EVENTS: ChurchEvent[] = [
 
 export default function CommunityGraceHub() {
   const [activeTab, setActiveTab] = useState<"prayer" | "ai" | "locator" | "calendar">("prayer");
+
+  const handlePrintSchedule = () => {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { dateStyle: 'medium' });
+
+    const streamLines = [
+      "BT",
+      "/F1 16 Tf",
+      "50 720 Td",
+      "(CHARISMATIC EVANGELICALS CHURCH) Tj",
+      "/F1 12 Tf",
+      "0 -30 Td",
+      "(CHURCH TIMELINE & SCHEDULE) Tj",
+      "/F1 9 Tf",
+      "0 -20 Td",
+      `([Generated on ${dateStr}]) Tj`,
+      "0 -30 Td",
+      "() Tj"
+    ];
+
+    BASE_EVENTS.forEach((ev, idx) => {
+      const cleanTitle = ev.title.replace(/[\(\)]/g, "");
+      const cleanLocation = ev.location.replace(/[\(\)]/g, "");
+      
+      streamLines.push(
+        "/F1 11 Tf",
+        "0 -25 Td",
+        `(${idx + 1}. ${cleanTitle.toUpperCase()}) Tj`,
+        "/F1 9 Tf",
+        "0 -15 Td",
+        `([Category] ${ev.category}   [Date] ${ev.date}   [Time] ${ev.time}) Tj`,
+        "0 -12 Td",
+        `([Campus/Location] ${cleanLocation}) Tj`,
+        "0 -8 Td",
+        "() Tj"
+      );
+    });
+
+    streamLines.push(
+      "0 -35 Td",
+      "/F1 10 Tf",
+      "(Join us as we synchronize our hearts and calendars in covenant grace.) Tj",
+      "ET"
+    );
+
+    const streamText = streamLines.join("\n");
+    const streamLength = streamText.length;
+
+    const pdfContent = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length ${streamLength} >>
+stream
+${streamText}
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000240 00000 n 
+0000000305 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+${370 + streamLength}
+%%EOF`;
+
+    const blob = new Blob([pdfContent], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Charismatic_Evangelicals_Church_Schedule.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
   
   // —————————————————————————————————————————————————————————
   // 1. PRAYER CANVAS STATE
@@ -347,7 +439,7 @@ export default function CommunityGraceHub() {
   };
 
   return (
-    <section id="grace-hub-section" className="relative bg-[#FAF8F6] border-t border-[#E0D5CF] py-24 px-4 sm:px-6 lg:px-8 text-slate-800 select-none">
+    <section id="grace-hub-section" className="relative bg-[#f4eae2] border-t border-white/40 py-24 px-4 sm:px-6 lg:px-8 text-slate-800 select-none">
       {/* Decorative Brand Spotlights */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[70%] h-[350px] bg-gradient-to-tr from-[#8a1e25]/5 to-rose-500/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -355,7 +447,7 @@ export default function CommunityGraceHub() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-[#8a1e25] font-black bg-rose-50 border border-rose-100 px-3 py-1 rounded-full">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-[#8a1e25] font-black bg-[#f4eae2] border border-white/60 px-3 py-1.5 rounded-full shadow-neu-flat-sm">
             ✦ Community Grace & Faith Hub
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 uppercase">
@@ -367,14 +459,14 @@ export default function CommunityGraceHub() {
         </div>
 
         {/* Dashboard Tabs Grid with Soft Rose/Burgundy Container Style */}
-        <div className="bg-[#1a0c0d]/5 border border-[#8a1e25]/10 rounded-2xl p-1 md:p-1.5 grid grid-cols-2 md:grid-cols-4 gap-2 mb-10 max-w-4xl mx-auto ring-1 ring-rose-500/5">
+        <div className="bg-[#f4eae2] border border-white/60 rounded-[24px] p-2 grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-10 max-w-4xl mx-auto shadow-neu-inset">
           {/* TAB 1 */}
           <button 
             onClick={() => setActiveTab("prayer")}
-            className={`py-3.5 px-3 rounded-xl transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-bold tracking-wider uppercase border cursor-pointer ${
+            className={`py-3.5 px-3 rounded-[18px] transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-black tracking-widest uppercase cursor-pointer ${
               activeTab === "prayer"
-                ? "bg-church-burgundy text-white border-church-burgundy shadow-sm"
-                : "bg-transparent border-transparent text-slate-600 hover:text-church-burgundy hover:bg-rose-50"
+                ? "bg-[#f4eae2] text-church-burgundy shadow-neu-flat border border-white/65 font-black"
+                : "bg-transparent border-transparent text-slate-505 hover:text-church-burgundy"
             }`}
           >
             <HeartHandshake className="h-4 w-4" />
@@ -384,10 +476,10 @@ export default function CommunityGraceHub() {
           {/* TAB 2 */}
           <button 
             onClick={() => setActiveTab("ai")}
-            className={`py-3.5 px-3 rounded-xl transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-bold tracking-wider uppercase border cursor-pointer ${
+            className={`py-3.5 px-3 rounded-[18px] transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-black tracking-widest uppercase cursor-pointer ${
               activeTab === "ai"
-                ? "bg-church-burgundy text-white border-church-burgundy shadow-sm"
-                : "bg-transparent border-transparent text-slate-600 hover:text-church-burgundy hover:bg-rose-50"
+                ? "bg-[#f4eae2] text-church-burgundy shadow-neu-flat border border-white/65 font-black"
+                : "bg-transparent border-transparent text-slate-505 hover:text-church-burgundy"
             }`}
           >
             <Bot className="h-4 w-4" />
@@ -397,10 +489,10 @@ export default function CommunityGraceHub() {
           {/* TAB 3 */}
           <button 
             onClick={() => setActiveTab("locator")}
-            className={`py-3.5 px-3 rounded-xl transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-bold tracking-wider uppercase border cursor-pointer ${
+            className={`py-3.5 px-3 rounded-[18px] transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-black tracking-widest uppercase cursor-pointer ${
               activeTab === "locator"
-                ? "bg-church-burgundy text-white border-church-burgundy shadow-sm"
-                : "bg-transparent border-transparent text-slate-600 hover:text-church-burgundy hover:bg-rose-50"
+                ? "bg-[#f4eae2] text-church-burgundy shadow-neu-flat border border-white/65 font-black"
+                : "bg-transparent border-transparent text-slate-505 hover:text-church-burgundy"
             }`}
           >
             <MapPin className="h-4 w-4" />
@@ -410,10 +502,10 @@ export default function CommunityGraceHub() {
           {/* TAB 4 */}
           <button 
             onClick={() => setActiveTab("calendar")}
-            className={`py-3.5 px-3 rounded-xl transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-bold tracking-wider uppercase border cursor-pointer ${
+            className={`py-3.5 px-3 rounded-[18px] transition-all flex flex-col md:flex-row items-center justify-center gap-2 text-xs font-black tracking-widest uppercase cursor-pointer ${
               activeTab === "calendar"
-                ? "bg-church-burgundy text-white border-church-burgundy shadow-sm"
-                : "bg-transparent border-transparent text-slate-600 hover:text-church-burgundy hover:bg-rose-50"
+                ? "bg-[#f4eae2] text-church-burgundy shadow-neu-flat border border-white/65 font-black"
+                : "bg-transparent border-transparent text-slate-505 hover:text-church-burgundy"
             }`}
           >
             <Calendar className="h-4 w-4" />
@@ -422,7 +514,7 @@ export default function CommunityGraceHub() {
         </div>
 
         {/* Dynamic Display Panel container */}
-        <div className="bg-[#FCFAF9] border border-[#E0D5CF] rounded-3xl p-6 md:p-8 min-h-[480px] shadow-xl relative overflow-hidden">
+        <div className="bg-[#f4eae2] border border-white/50 rounded-[32px] p-6 md:p-10 min-h-[480px] shadow-neu-flat relative overflow-hidden">
           <AnimatePresence mode="wait">
             
             {/* 1. PRAYER CANVAS PANEL */}
@@ -433,8 +525,62 @@ export default function CommunityGraceHub() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.2 }}
-                className="space-y-8"
+                className="space-y-6"
               >
+                {/* Inline Top Sticky Prayer submission bar */}
+                <form 
+                  onSubmit={handleCreatePrayerSubmit} 
+                  className="bg-white border-2 border-rose-100/60 hover:border-church-burgundy/40 rounded-2xl p-4 shadow-md flex flex-col md:flex-row items-center gap-3 w-full transition-all duration-300"
+                >
+                  <div className="flex-grow w-full md:w-auto relative">
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="Type a new corporate prayer petition to post to the database..."
+                      value={newPrayerRequest}
+                      onChange={(e) => setNewPrayerRequest(e.target.value)}
+                      className="w-full bg-[#FCFAF9] border border-rose-100/60 rounded-xl py-2.5 px-4 text-xs text-slate-850 placeholder-slate-400 focus:outline-none focus:border-[#8a1e25] focus:ring-1 focus:ring-[#8a1e25]/20"
+                    />
+                  </div>
+                  <div className="w-full md:w-48">
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="Your Name / Initials"
+                      value={newPrayerAuthor}
+                      onChange={(e) => setNewPrayerAuthor(e.target.value)}
+                      className="w-full bg-[#FCFAF9] border border-rose-100/60 rounded-xl py-2.5 px-4 text-xs text-slate-850 placeholder-slate-400 focus:outline-none focus:border-[#8a1e25] focus:ring-1 focus:ring-[#8a1e25]/20"
+                    />
+                  </div>
+                  <div className="w-full md:w-44">
+                    <select 
+                      value={newPrayerCategory}
+                      onChange={(e) => setNewPrayerCategory(e.target.value as any)}
+                      className="w-full bg-[#FCFAF9] border border-rose-100/60 rounded-xl py-2.5 px-4 text-xs text-slate-800 focus:outline-none focus:border-[#8a1e25] focus:ring-1 focus:ring-[#8a1e25]/20 cursor-pointer"
+                    >
+                      <option value="Faith">Faith Guidance</option>
+                      <option value="Healing">Healing Protection</option>
+                      <option value="Guidance">Life Path</option>
+                      <option value="Family">Family restore</option>
+                      <option value="Other">Other need</option>
+                    </select>
+                  </div>
+                  <button 
+                    type="submit"
+                    disabled={isPrayerSubmitting}
+                    className="w-full md:w-auto shrink-0 bg-church-burgundy hover:bg-[#a1232c] text-white rounded-xl py-2.5 px-6 text-xs font-black tracking-widest uppercase cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md shadow-rose-900/15 disabled:opacity-50 border-none select-none active:scale-95"
+                  >
+                    {isPrayerSubmitting ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin text-white" />
+                    ) : (
+                      <>
+                        <Plus className="h-3.5 w-3.5" />
+                        <span>POST</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+
                 <div className="flex flex-col lg:flex-row justify-between items-start gap-8 text-slate-800">
                   <div className="max-w-md space-y-3">
                     <h3 className="font-display text-xl md:text-2xl font-black text-slate-900 uppercase tracking-tight">
@@ -444,70 +590,15 @@ export default function CommunityGraceHub() {
                       A visual prayer shield where we collectively carry each other's burdens. Type your prayer petition to post it instantly in real-time. Gather corporate strength as other believers click to declare their prayer shield.
                     </p>
                     
-                    {/* Submit Prayer Form Card */}
-                    <form onSubmit={handleCreatePrayerSubmit} className="bg-[#8a1e25]/5 border border-[#8a1e25]/10 rounded-2xl p-5 space-y-4 mt-6">
-                      <div className="space-y-1">
-                        <label className="block text-[9px] uppercase tracking-widest font-extrabold text-church-burgundy">
-                          Beloved Author
-                        </label>
-                        <input 
-                          type="text" 
-                          required
-                          placeholder="Your initials or name"
-                          value={newPrayerAuthor}
-                          onChange={(e) => setNewPrayerAuthor(e.target.value)}
-                          className="w-full bg-white border border-rose-100 rounded-lg py-2 px-3 text-xs text-slate-850 placeholder-slate-400 focus:outline-none focus:border-[#8a1e25]"
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="space-y-1">
-                          <label className="block text-[9px] uppercase tracking-widest font-extrabold text-church-burgundy">
-                            Petition Category
-                          </label>
-                          <select 
-                            value={newPrayerCategory}
-                            onChange={(e) => setNewPrayerCategory(e.target.value as any)}
-                            className="w-full bg-white border border-rose-100 rounded-lg py-2 px-3 text-xs text-slate-800 focus:outline-none focus:border-[#8a1e25] cursor-pointer"
-                          >
-                            <option value="Faith">Faith Guidance</option>
-                            <option value="Healing">Healing Protection</option>
-                            <option value="Guidance">Life Path</option>
-                            <option value="Family">Family restore</option>
-                            <option value="Other">Other need</option>
-                          </select>
-                        </div>
-                        <div className="flex items-end">
-                          <button 
-                            type="submit"
-                            disabled={isPrayerSubmitting}
-                            className="w-full bg-church-burgundy hover:bg-[#a1232c] text-white rounded-lg py-2 px-3 text-xs font-black tracking-widest uppercase cursor-pointer flex items-center justify-center gap-1 shadow-md shadow-rose-900/10 active:scale-95 border-none"
-                          >
-                            {isPrayerSubmitting ? (
-                              <Loader2 className="h-3 w-3 animate-spin text-white" />
-                            ) : (
-                              <>
-                                <Plus className="h-3 w-3 inline" /> POST
-                              </>
-                            )}
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="block text-[9px] uppercase tracking-widest font-extrabold text-church-burgundy">
-                          petition details
-                        </label>
-                        <textarea 
-                          required
-                          rows={3}
-                          placeholder="Lord, we stand together for..."
-                          value={newPrayerRequest}
-                          onChange={(e) => setNewPrayerRequest(e.target.value)}
-                          className="w-full bg-white border border-rose-100 rounded-lg py-2 px-3 text-xs text-slate-850 placeholder-slate-400 focus:outline-none focus:border-[#8a1e25] resize-none"
-                        />
-                      </div>
-                    </form>
+                    {/* Scriptural Devotional Card */}
+                    <div className="bg-[#FAF8F5] border border-[#E0D5CF]/60 rounded-2xl p-5 space-y-3 mt-6">
+                      <p className="text-xs font-serif font-medium italic text-[#8a1e25] leading-relaxed">
+                        "For where two or three are gathered in my name, there am I among them."
+                      </p>
+                      <p className="text-[10px] font-mono uppercase tracking-widest text-[#d2737d] font-bold block text-right">
+                        — Matthew 18:20
+                      </p>
+                    </div>
                   </div>
 
                   {/* Prayer Grid Display */}
@@ -973,9 +1064,19 @@ export default function CommunityGraceHub() {
 
                   {/* Right side: Interactive Events schedule list */}
                   <div className="flex-grow w-full space-y-4 text-slate-800">
-                    <h4 className="font-mono text-[9px] uppercase tracking-widest text-[#8a1e25] font-black block">
-                       Upcoming Corporate Timeline
-                    </h4>
+                    <div className="flex items-center justify-between gap-4 border-b border-rose-100 pb-2 flex-wrap">
+                      <h4 className="font-mono text-[9px] uppercase tracking-widest text-[#8a1e25] font-black block">
+                         Upcoming Corporate Timeline
+                      </h4>
+                      <button
+                        onClick={handlePrintSchedule}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#8a1e25]/30 hover:border-[#8a1e25] bg-transparent hover:bg-[#8a1e25]/5 text-[#8a1e25] text-[9px] uppercase tracking-wider font-extrabold transition-all duration-200 cursor-pointer select-none active:scale-95 text-left"
+                        title="Print PDF version of the listed church events"
+                      >
+                        <Printer className="h-3.5 w-3.5" />
+                        <span>Print Schedule</span>
+                      </button>
+                    </div>
                     
                     <div className="grid gap-3.5">
                       {BASE_EVENTS.map((ev) => {

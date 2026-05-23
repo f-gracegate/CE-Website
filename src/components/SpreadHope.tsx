@@ -33,7 +33,7 @@ export default function SpreadHope() {
   ];
 
   return (
-    <section id="hope-section" className="relative bg-[#FAF8F6] py-20 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-b border-[#E0D5CF]">
+    <section id="hope-section" className="relative bg-[#f4eae2] py-20 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-b border-white/40">
       
       {/* 🟢 BOTTOM LEFT ORNAMENT: Small dot grids */}
       <div className="absolute bottom-[10%] left-[5%] hidden md:grid grid-cols-5 gap-2 opacity-15 pointer-events-none z-0">
@@ -45,22 +45,24 @@ export default function SpreadHope() {
       <div className="mx-auto max-w-7xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 items-center gap-12 lg:gap-20">
           
-          {/* LEFT COLUMN: Food Packing/Volunteer Photo */}
+          {/* LEFT COLUMN: Food Packing/Volunteer Photo inside Neumorphic Frame */}
           <div className="md:col-span-6 relative flex justify-center z-10 w-full mb-6 md:mb-0">
             {/* Outline box behind under volunteer image */}
-            <div className="absolute -left-4 -top-4 w-28 h-28 bg-church-burgundy/10 rounded-xl z-0" />
+            <div className="absolute -left-4 -top-4 w-28 h-28 bg-[#f4eae2] rounded-3xl z-0" />
             
-            <div className="relative w-full max-w-md rounded-xl overflow-hidden shadow-2xl z-10 border border-slate-100 transform hover:scale-[1.01] transition-transform duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1559027615-cd2457b26b20?auto=format&fit=crop&w=800&h=550&q=80"
-                alt="Volunteers Packing outreach food baskets in high faith"
-                className="w-full h-[320px] object-cover"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-rose-950/10 mix-blend-color" />
-              {/* Joyful Serve Tag */}
-              <div className="absolute bottom-3 right-3 bg-church-burgundy text-white font-display text-[9px] font-extrabold py-1.5 px-3 uppercase rounded shadow-lg transform rotate-1">
-                Serving Hope Locally
+            <div className="p-3 rounded-[32px] bg-[#f4eae2] border border-white/60 shadow-neu-flat w-full max-w-md">
+              <div className="relative rounded-[24px] overflow-hidden shadow-inner">
+                <img
+                  src="https://images.unsplash.com/photo-1559027615-cd2457b26b20?auto=format&fit=crop&w=800&h=550&q=80"
+                  alt="Volunteers Packing outreach food baskets in high faith"
+                  className="w-full h-[320px] object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-rose-950/10 mix-blend-color" />
+                {/* Joyful Serve Tag */}
+                <div className="absolute bottom-3 right-3 bg-church-burgundy text-white font-display text-[9px] font-extrabold py-1.5 px-3 uppercase rounded-full shadow-lg transform rotate-1">
+                  Serving Hope Locally
+                </div>
               </div>
             </div>
           </div>
@@ -92,28 +94,30 @@ export default function SpreadHope() {
               <h4 className="font-mono text-[10px] uppercase tracking-widest text-[#8a1e25] font-extrabold mb-3">
                 JOIN AN OUTREACH INITIATIVE THIS WEEK
               </h4>
-              <div className="space-y-2">
+              <div className="space-y-4">
                 {outreachProjects.map((proj, idx) => {
                   const Icon = proj.icon;
                   const isOpen = activeOutreachIndex === idx;
                   return (
                     <div 
                       key={idx}
-                      className="border border-[#E0D5CF]/80 bg-[#FCFAF9] rounded-xl overflow-hidden shadow-xs hover:border-church-burgundy transition-all"
+                      className={`border border-white/40 bg-[#f4eae2] rounded-2xl overflow-hidden transition-all duration-300 ${
+                        isOpen ? "shadow-neu-inset" : "shadow-neu-flat-sm"
+                      }`}
                     >
                       <button
                         onClick={() => setActiveOutreachIndex(isOpen ? null : idx)}
-                        className="w-full flex items-center justify-between p-3 text-left focus:outline-none cursor-pointer"
+                        className="w-full flex items-center justify-between p-4.5 text-left focus:outline-none cursor-pointer"
                       >
-                        <div className="flex items-center gap-2.5">
-                          <div className={`p-1.5 rounded-lg border ${proj.color}`}>
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-xl bg-[#f4eae2] shadow-neu-flat-sm border border-white/50 text-[#8a1e25]">
                             <Icon className="h-4 w-4" />
                           </div>
                           <span className="text-xs md:text-sm font-bold text-slate-900 tracking-tight">
                             {proj.title}
                           </span>
                         </div>
-                        <ArrowRight className={`h-4 w-4 text-slate-400 transition-transform ${isOpen ? "rotate-90 text-church-burgundy" : ""}`} />
+                        <ArrowRight className={`h-4 w-4 text-[#8a1e25] transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`} />
                       </button>
 
                       <AnimatePresence initial={false}>
@@ -123,7 +127,7 @@ export default function SpreadHope() {
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.18 }}
-                            className="px-3.5 pb-3 pt-1 border-t border-[#E0D5CF]/40 bg-rose-50/10"
+                            className="px-5 pb-4 pt-1 border-t border-black/5"
                           >
                             <p className="text-xs text-slate-600 font-sans leading-relaxed">
                               <span className="font-bold text-slate-800">What:</span> {proj.action}

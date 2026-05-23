@@ -69,184 +69,186 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
   ];
 
   return (
-    <nav className="relative z-40 bg-[#FAF8F6]/95 backdrop-blur-md border-b border-[#E0D5CF] text-slate-800 font-sans shadow-sm">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
-          
-          {/* Logo / Brand Name ( Beautiful burgundy/rose symbol and logo from upload ) */}
-          <a href="#" className="flex items-center gap-1 group">
-            <ChurchLogo className="h-16 w-16 group-hover:scale-105 transition-transform" variant="brand" />
-          </a>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-6">
-            {menuItems.map((item) => (
-              <div key={item.name} className="relative">
-                {item.hasDropdown ? (
-                  <button
-                    onClick={() => toggleDropdown(item.name)}
-                    className={`flex items-center gap-1.5 text-xs font-bold tracking-wider text-slate-600 hover:text-church-burgundy transition-colors uppercase cursor-pointer ${
-                      activeDropdown === item.name ? "text-church-burgundy" : ""
-                    }`}
-                  >
-                    {item.name}
-                    <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === item.name ? "rotate-180" : ""
-                    }`} />
-                  </button>
-                ) : (
-                  <a
-                    href={item.link}
-                    className="text-xs font-bold tracking-wider text-slate-600 hover:text-church-burgundy transition-colors uppercase"
-                  >
-                    {item.name}
-                  </a>
-                )}
-
-                {/* Dropdown Menu Container */}
-                <AnimatePresence>
-                  {item.hasDropdown && activeDropdown === item.name && (
-                    <>
-                      {/* Invisible backdrop to dismiss when clicking outside */}
-                      <div 
-                        className="fixed inset-0 z-30" 
-                        onClick={() => setActiveDropdown(null)} 
-                      />
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-3 w-80 rounded-xl border border-rose-100 bg-[#FAF8F6] p-3 shadow-xl shadow-rose-900/10 ring-1 ring-church-burgundy/5 z-40"
-                      >
-                        <div className="grid gap-1">
-                          {item.dropdownItems?.map((drop) => {
-                            const IconComp = drop.icon;
-                            return (
-                              <a
-                                key={drop.label}
-                                href={drop.href}
-                                onClick={() => setActiveDropdown(null)}
-                                className="flex items-start gap-3 rounded-lg p-2.5 transition-all hover:bg-rose-50/40"
-                              >
-                                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-rose-50 text-church-burgundy">
-                                  <IconComp className="h-4.5 w-4.5" />
-                                </div>
-                                <div>
-                                  <p className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                                    {drop.label}
-                                  </p>
-                                  <p className="text-[11px] text-slate-500 mt-0.5 leading-normal font-sans">
-                                    {drop.desc}
-                                  </p>
-                                </div>
-                              </a>
-                            );
-                          })}
-                        </div>
-                      </motion.div>
-                    </>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
-
-          {/* Right Action Panel */}
-          <div className="hidden lg:flex items-center gap-4">
-            {/* Search Trigger */}
-            <button 
-              onClick={() => onOpenModal("search")}
-              className="p-1 px-2 rounded-lg text-slate-600 hover:text-church-burgundy transition-colors hover:bg-rose-50/40 cursor-pointer"
-              aria-label="Search site"
-            >
-              <Search className="h-4.5 w-4.5" />
-            </button>
-
-            {/* Give Filled Button */}
-            <button
-              onClick={() => onOpenModal("give")}
-              className="rounded-lg bg-church-burgundy px-4.5 py-1.5 text-xs font-extrabold tracking-widest text-[#ffffff] hover:bg-[#a0222a] transition-all shadow-md shadow-rose-900/10 active:scale-95 cursor-pointer"
-            >
-              GIVE
-            </button>
-          </div>
-
-          {/* Mobile Right Controls: Search, Select, Give, Burger */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <button
-              onClick={() => onOpenModal("give")}
-              className="rounded bg-church-burgundy px-3 py-1 text-[11px] font-extrabold tracking-wider text-[#ffffff] hover:bg-[#a0222a] transition-all cursor-pointer"
-            >
-              GIVE
-            </button>
-
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="rounded-lg p-2 text-slate-650 hover:bg-rose-50 hover:text-slate-900"
-              aria-label="Toggle mobile menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Mobile Menu Drawer */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t border-rose-100 bg-[#FAF8F6] px-4 py-4 shadow-inner"
-          >
-            <div className="space-y-3 pb-3">
+    <div className="px-4 sm:px-6 lg:px-8 pt-4">
+      <nav className="relative z-40 mx-auto max-w-7xl rounded-[24px] bg-[#f4eae2] border border-white/60 text-slate-800 font-sans shadow-neu-flat">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+          <div className="flex h-20 items-center justify-between">
+            
+            {/* Logo / Brand Name ( Beautiful burgundy/rose symbol and logo from upload ) */}
+            <a href="#" className="flex items-center gap-1 group">
+              <ChurchLogo className="h-16 w-16 group-hover:scale-105 transition-transform" variant="brand" />
+            </a>
+  
+            {/* Desktop Navigation Links */}
+            <div className="hidden lg:flex items-center gap-6">
               {menuItems.map((item) => (
-                <div key={item.name} className="border-b border-rose-50/60 pb-2">
+                <div key={item.name} className="relative">
                   {item.hasDropdown ? (
-                    <div>
-                      <p className="text-xs font-extrabold text-church-burgundy tracking-widest py-1 uppercase">
-                        {item.name}
-                      </p>
-                      <div className="pl-4 mt-1 space-y-2">
-                        {item.dropdownItems?.map((drop) => (
-                          <a
-                            key={drop.label}
-                            href={drop.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="block text-xs text-slate-600 hover:text-church-burgundy py-1"
-                          >
-                            • {drop.label}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
+                    <button
+                      onClick={() => toggleDropdown(item.name)}
+                      className={`flex items-center gap-1.5 text-xs font-bold tracking-wider text-slate-700 hover:text-church-burgundy transition-colors uppercase cursor-pointer ${
+                        activeDropdown === item.name ? "text-church-burgundy" : ""
+                      }`}
+                    >
+                      {item.name}
+                      <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                        activeDropdown === item.name ? "rotate-180" : ""
+                      }`} />
+                    </button>
                   ) : (
                     <a
                       href={item.link}
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="block text-xs font-bold text-slate-800 hover:text-church-burgundy py-1.5 uppercase tracking-wider"
+                      className="text-xs font-bold tracking-wider text-slate-700 hover:text-church-burgundy transition-colors uppercase"
                     >
                       {item.name}
                     </a>
                   )}
+  
+                  {/* Dropdown Menu Container */}
+                  <AnimatePresence>
+                    {item.hasDropdown && activeDropdown === item.name && (
+                      <>
+                        {/* Invisible backdrop to dismiss when clicking outside */}
+                        <div 
+                          className="fixed inset-0 z-30" 
+                          onClick={() => setActiveDropdown(null)} 
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute left-1/2 -translate-x-1/2 mt-3 w-80 rounded-[20px] border border-white bg-[#f4eae2] p-3 shadow-neu-flat z-40"
+                        >
+                          <div className="grid gap-1">
+                            {item.dropdownItems?.map((drop) => {
+                              const IconComp = drop.icon;
+                              return (
+                                <a
+                                  key={drop.label}
+                                  href={drop.href}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className="flex items-start gap-3 rounded-xl p-2.5 transition-all hover:bg-white/40"
+                                >
+                                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/50 text-church-burgundy shadow-neu-flat-sm">
+                                    <IconComp className="h-4.5 w-4.5" />
+                                  </div>
+                                  <div>
+                                    <p className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                                      {drop.label}
+                                    </p>
+                                    <p className="text-[11px] text-slate-500 mt-0.5 leading-normal font-sans">
+                                      {drop.desc}
+                                    </p>
+                                  </div>
+                                </a>
+                              );
+                            })}
+                          </div>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
-              <div className="pt-2 text-center text-[10px] text-slate-450 mt-1 font-semibold uppercase tracking-wider">
-                Active Campus: {selectedLocation}
-              </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+  
+            {/* Right Action Panel */}
+            <div className="hidden lg:flex items-center gap-4">
+              {/* Search Trigger (Neumorphic round button) */}
+              <button 
+                onClick={() => onOpenModal("search")}
+                className="p-2.5 rounded-full bg-[#f4eae2] border border-white/50 text-slate-700 hover:text-church-burgundy shadow-neu-flat-sm hover:shadow-neu-inset transition-all duration-300 cursor-pointer"
+                aria-label="Search site"
+              >
+                <Search className="h-4.5 w-4.5" />
+              </button>
+  
+              {/* Give Filled Button */}
+              <button
+                onClick={() => onOpenModal("give")}
+                className="rounded-xl bg-church-burgundy px-5 py-2.5 text-xs font-extrabold tracking-widest text-[#ffffff] hover:bg-[#a0222a] transition-all shadow-[4px_4px_10px_#d3c3b8,-4px_-4px_10px_#ffffff] active:scale-95 cursor-pointer border border-[#8a1e25]"
+              >
+                GIVE
+              </button>
+            </div>
+  
+            {/* Mobile Right Controls: Search, Select, Give, Burger */}
+            <div className="flex items-center gap-2 lg:hidden">
+              <button
+                onClick={() => onOpenModal("give")}
+                className="rounded-xl bg-church-burgundy px-3.5 py-1.5 text-[11px] font-extrabold tracking-wider text-[#ffffff] hover:bg-[#a0222a] transition-all cursor-pointer shadow-sm"
+              >
+                GIVE
+              </button>
+  
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="rounded-xl p-2.5 bg-[#f4eae2] border border-white/50 text-slate-700 shadow-neu-flat-sm hover:bg-white/40"
+                aria-label="Toggle mobile menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+  
+          </div>
+        </div>
+  
+        {/* Mobile Menu Drawer */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden border-t border-white/40 bg-[#f4eae2] rounded-b-[24px] px-6 py-4 shadow-neu-inset"
+            >
+              <div className="space-y-3 pb-3">
+                {menuItems.map((item) => (
+                  <div key={item.name} className="border-b border-white/30 pb-2">
+                    {item.hasDropdown ? (
+                      <div>
+                        <p className="text-xs font-extrabold text-church-burgundy tracking-widest py-1 uppercase">
+                          {item.name}
+                        </p>
+                        <div className="pl-4 mt-1 space-y-2">
+                          {item.dropdownItems?.map((drop) => (
+                            <a
+                              key={drop.label}
+                              href={drop.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="block text-xs text-slate-650 hover:text-church-burgundy py-1"
+                            >
+                              • {drop.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <a
+                        href={item.link}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="block text-xs font-bold text-slate-800 hover:text-church-burgundy py-1.5 uppercase tracking-wider"
+                      >
+                        {item.name}
+                      </a>
+                    )}
+                  </div>
+                ))}
+                <div className="pt-2 text-center text-[10px] text-slate-500 mt-1 font-semibold uppercase tracking-wider">
+                  Active Campus: {selectedLocation}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </div>
   );
 }
