@@ -92,27 +92,28 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
           {/* RIGHT COLUMN: Cozy Fellowship Image & Overlapping Plus Sign Grid */}
           <motion.div 
             variants={itemVariants}
-            className="order-1 md:order-2 md:col-span-6 relative flex justify-center z-10 w-full"
+            className="order-1 md:order-2 md:col-span-6 flex justify-center z-10 w-full"
           >
-            
-            {/* ➕ OVERLAPPING PLUS MATRIX: on the right side of the image */}
-            <div className="absolute right-[-10px] bottom-[-20px] hidden sm:grid grid-cols-6 gap-x-6 gap-y-4 text-church-rose/30 font-display text-xs select-none pointer-events-none z-0">
-              {plusSigns.map((_, i) => (
-                <div key={i} className="font-light">+</div>
-              ))}
-            </div>
+            <div className="relative w-full max-w-md">
+              {/* ➕ OVERLAPPING PLUS MATRIX: anchored precisely to the right side of the image container */}
+              <div className="absolute -right-3 -bottom-5 hidden sm:grid grid-cols-6 gap-x-6 gap-y-4 text-church-rose/30 font-display text-xs select-none pointer-events-none z-0">
+                {plusSigns.map((_, i) => (
+                  <div key={i} className="font-light">+</div>
+                ))}
+              </div>
 
-            {/* Group Bible study / couch connection image inside Neumorphic Bezel Frame */}
-            <div className="p-3 rounded-[32px] bg-[#f4eae2] border border-white/60 shadow-neu-flat w-full max-w-md">
-              <div className="relative rounded-[24px] overflow-hidden shadow-inner">
-                <img
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&h=550&q=80"
-                  alt="Church Small Group Bible Study Circle"
-                  className="w-full h-[320px] object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                {/* Cozy tint overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent" />
+              {/* Group Bible study / couch connection image inside Neumorphic Bezel Frame */}
+              <div className="p-3 rounded-[32px] bg-[#f4eae2] border border-white/60 shadow-neu-flat w-full relative z-10">
+                <div className="relative rounded-[24px] overflow-hidden shadow-inner">
+                  <img
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&h=550&q=80"
+                    alt="Church Small Group Bible Study Circle"
+                    className="w-full h-[320px] object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  {/* Cozy tint overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent" />
+                </div>
               </div>
             </div>
 
