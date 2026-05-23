@@ -108,53 +108,61 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
                 return (
                   <div
                     key={member.id}
-                    onMouseEnter={() => setHoveredMemberId(member.id)}
-                    onMouseLeave={() => setHoveredMemberId(null)}
-                    onClick={() => onOpenTestimony(member)}
-                    className={`relative rounded-full p-1 bg-[#f4eae2] border border-white/45 transition-all duration-500 cursor-pointer group ${member.height} ${offsetClass} ${
-                      isHovered 
-                        ? "scale-[1.05] z-[25] -translate-y-3 shadow-neu-flat" 
-                        : "shadow-neu-flat-sm z-10"
-                    }`}
+                    className={`relative ${member.height} ${offsetClass} ${
+                      isHovered ? "z-30" : "z-10"
+                    } transition-all duration-500`}
                   >
-                    <div className="relative w-full h-full rounded-full overflow-hidden">
-                      {/* Background colorful container backing clipping of people */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950/80" />
-  
-                      {/* Image of person popping up inside */}
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover grayscale-15 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 origin-bottom filter object-top"
-                      />
-  
-                      {/* Glowing particle hover accent */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-transparent opacity-90" />
-  
-                      {/* Details: Name, role and icon positioned on hover */}
-                      <div className="absolute bottom-5 inset-x-2 text-center flex flex-col items-center">
-                        <div className="bg-slate-950/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-slate-800/80 mb-1 max-w-[90%] transition-colors duration-300 group-hover:border-[#d2737d]/40">
-                          <p className="text-[10px] sm:text-[11px] font-black text-white tracking-tight truncate">
-                            {member.name.split(" ")[0]}
-                          </p>
-                          <p className="text-[8px] sm:text-[9px] text-[#d2737d] font-mono tracking-wider font-semibold truncate uppercase mt-0.5">
-                            {member.role}
-                          </p>
+                    <motion.div
+                      onMouseEnter={() => setHoveredMemberId(member.id)}
+                      onMouseLeave={() => setHoveredMemberId(null)}
+                      onClick={() => onOpenTestimony(member)}
+                      whileHover={{
+                        y: -14,
+                        scale: 1.06,
+                        boxShadow: "15px 15px 30px #c1b1a6, -15px -15px 30px #ffffff, 0 0 24px rgba(210, 115, 125, 0.45)",
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                      className="relative w-full h-full rounded-full p-1 bg-[#f4eae2] border border-white/45 cursor-pointer group shadow-neu-flat-sm"
+                    >
+                      <div className="relative w-full h-full rounded-full overflow-hidden">
+                        {/* Background colorful container backing clipping of people */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950/80" />
+    
+                        {/* Image of person popping up inside */}
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover grayscale-15 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 origin-bottom filter object-top"
+                        />
+    
+                        {/* Glowing particle hover accent */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-transparent opacity-90" />
+    
+                        {/* Details: Name, role and icon positioned on hover */}
+                        <div className="absolute bottom-5 inset-x-2 text-center flex flex-col items-center">
+                          <div className="bg-slate-950/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-slate-800/80 mb-1 max-w-[90%] transition-colors duration-300 group-hover:border-[#d2737d]/40">
+                            <p className="text-[10px] sm:text-[11px] font-black text-white tracking-tight truncate">
+                              {member.name.split(" ")[0]}
+                            </p>
+                            <p className="text-[8px] sm:text-[9px] text-[#d2737d] font-mono tracking-wider font-semibold truncate uppercase mt-0.5">
+                              {member.role}
+                            </p>
+                          </div>
+    
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
+                            className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8a1e25] text-white shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform"
+                          >
+                            <ArrowUpRight className="h-3 w-3 stroke-[3]" />
+                          </motion.div>
                         </div>
-  
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
-                          className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8a1e25] text-white shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform"
-                        >
-                          <ArrowUpRight className="h-3 w-3 stroke-[3]" />
-                        </motion.div>
                       </div>
-                    </div>
-
-                    {/* Light border reflection */}
-                    <div className="absolute inset-x-0 top-0 h-[100px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none rounded-t-full" />
+  
+                      {/* Light border reflection */}
+                      <div className="absolute inset-x-0 top-0 h-[100px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none rounded-t-full" />
+                    </motion.div>
                   </div>
                 );
               })}

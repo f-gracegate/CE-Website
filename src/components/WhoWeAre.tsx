@@ -1,7 +1,64 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { WHO_WE_ARE_TABS } from "../data";
 import { ChevronRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
+
+interface AnimatedCounterProps {
+  value: string;
+  triggerKey?: string;
+}
+
+function AnimatedCounter({ value, triggerKey }: AnimatedCounterProps) {
+  const isPlus = value.endsWith("+");
+  const cleanStr = value.replace(/[^0-9]/g, "");
+  const target = parseInt(cleanStr, 10);
+  
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (isNaN(target)) {
+      return;
+    }
+
+    let start = 0;
+    const end = target;
+    const duration = 1600; // 1.6s
+    let startTimestamp: number | null = null;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      
+      // Quadratic ease-out
+      const easeProgress = progress * (2 - progress);
+      const currentVal = Math.floor(easeProgress * (end - start) + start);
+      
+      setCurrent(currentVal);
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    const animFrame = window.requestAnimationFrame(step);
+    
+    return () => {
+      window.cancelAnimationFrame(animFrame);
+      setCurrent(0);
+    };
+  }, [target, triggerKey]);
+
+  if (isNaN(target)) {
+    return <span>{value}</span>;
+  }
+
+  return (
+    <span>
+      {current.toLocaleString()}
+      {isPlus ? "+" : ""}
+    </span>
+  );
+}
 
 export default function WhoWeAre() {
   const [activeTabId, setActiveTabId] = useState("who-we-are");
@@ -149,16 +206,37 @@ export default function WhoWeAre() {
                 {/* Quick stats panel as individual raised cards */}
                 {currentTab.stats && (
                   <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-black/5 pt-6">
-                    {currentTab.stats.map((stat, sIdx) => (
-                      <div key={sIdx} className="flex flex-col items-center justify-center p-4 bg-[#f4eae2] rounded-[20px] border border-white/50 shadow-neu-flat-sm text-center">
-                        <span className="font-display text-2xl md:text-3xl font-black text-[#8a1e25]">
-                          {stat.value}
-                        </span>
-                        <span className="font-mono text-[8px] uppercase tracking-wider text-slate-500 mt-1">
-                          {stat.label}
-                        </span>
-                      </div>
-                    ))}
+                    {currentTab.stats.map((stat, sIdx) => {
+                      const isGlobalReach = stat.label.toLowerCase().includes("global reach");
+                      return (
+                        <motion.div
+                          key={sIdx}
+                          whileHover={{
+                            y: -6,
+                            scale: 1.03,
+                            boxShadow: "14px 14px 28px #e6dad0, -14px -14px 28px #ffffff, 0 0 16px rgba(138, 30, 37, 0.15)",
+                            borderColor: "rgba(138, 30, 37, 0.2)"
+                          }}
+                          transition={{ type: "spring", stiffness: 350, damping: 20 }}
+                          className="flex flex-col items-center justify-center p-4 bg-[#f4eae2] rounded-[20px] border border-white/50 shadow-neu-flat-sm text-center relative overflow-hidden group cursor-default transition-colors duration-300"
+                        >
+                          <span className="font-display text-2xl md:text-3xl font-black text-[#8a1e25] flex items-center gap-0.5">
+                            <AnimatedCounter value={stat.value} triggerKey={activeTabId} />
+                          </span>
+                          <span className="font-mono text-[8px] uppercase tracking-wider text-slate-500 mt-1 select-none font-bold">
+                            {stat.label}
+                          </span>
+                          
+                          {/* Pulsing indicator specifically for Global Reach to heighten tactile interactive premium vibe */}
+                          {isGlobalReach && (
+                            <div className="absolute top-2 right-2 flex h-2 w-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8a1e25]/50 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8a1e25]"></span>
+                            </div>
+                          )}
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 )}
 

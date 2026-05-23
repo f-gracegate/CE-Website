@@ -49,7 +49,7 @@ export const WHO_WE_ARE_TABS: ChurchTabContent[] = [
     stats: [
       { value: "12,400+", label: "Active Believers" },
       { value: "14", label: "Local Gatherings" },
-      { value: "48", label: "Global Missions Funded" }
+      { value: "48", label: "Global Reach" }
     ]
   },
   {

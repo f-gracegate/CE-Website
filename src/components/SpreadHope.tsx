@@ -404,6 +404,12 @@ export default function SpreadHope() {
                     }
                   }}
                   whileDrag={{ scale: 1.02, rotate: 0 }}
+                  whileHover={{ 
+                    y: -6,
+                    scale: 1.012,
+                    boxShadow: "16px 16px 32px #ccc0b4, -16px -16px 32px #ffffff",
+                    transition: { duration: 0.25, ease: "easeOut" }
+                  }}
                   initial={{ 
                     opacity: 0, 
                     scale: 0.94, 

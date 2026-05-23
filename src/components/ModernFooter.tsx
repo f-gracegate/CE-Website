@@ -17,15 +17,23 @@ import ChurchLogo from "./ChurchLogo";
 export default function ModernFooter() {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [shakeCount, setShakeCount] = useState(0);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim().includes("@")) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (emailRegex.test(email.trim())) {
       setIsSubscribed(true);
+      setErrorMsg("");
       setTimeout(() => {
         setIsSubscribed(false);
         setEmail("");
       }, 5000);
+    } else {
+      setShakeCount((prev) => prev + 1);
+      setErrorMsg("Please enter a valid email address.");
     }
   };
 
@@ -55,23 +63,49 @@ export default function ModernFooter() {
               </h3>
 
               {/* White Pill Input and Burgundy Subscribe Button */}
-              <form onSubmit={handleSubscribe} className="mt-8 w-full max-w-md">
+              <form onSubmit={handleSubscribe} className="mt-8 w-full max-w-md" noValidate>
                 {!isSubscribed ? (
-                  <div className="flex items-center gap-2 bg-[#f4eae2] rounded-full p-2.5 shadow-neu-inset border border-white/60 focus-within:border-white transition-all">
-                    <input
-                      type="email"
-                      required
-                      placeholder="Your Email."
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-transparent pl-4 pr-2 py-2 text-xs md:text-sm text-slate-800 outline-none placeholder-slate-400 font-bold"
-                    />
-                    <button
-                      type="submit"
-                      className="rounded-full bg-church-burgundy hover:bg-[#a1232c] px-6 py-3 text-xs font-black uppercase tracking-wider text-white transition-all shadow-neu-flat-sm hover:shadow-neu-flat active:scale-95 whitespace-nowrap border-none cursor-pointer margin-0"
+                  <div className="flex flex-col gap-2">
+                    <motion.div
+                      key={shakeCount} /* Re-creates element to reset and play keyframe animations on subsequent fails */
+                      animate={shakeCount > 0 ? {
+                        x: [0, -10, 10, -10, 10, -6, 6, -3, 3, 0]
+                      } : { x: 0 }}
+                      transition={{ duration: 0.45, ease: "easeInOut" }}
+                      className={`flex items-center gap-2 bg-[#f4eae2] rounded-full p-2.5 shadow-neu-inset border transition-all ${
+                        errorMsg ? "border-red-400 focus-within:border-red-500" : "border-white/60 focus-within:border-white"
+                      }`}
                     >
-                      Subscribe
-                    </button>
+                      <input
+                        type="email"
+                        placeholder="Your Email."
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          if (errorMsg) setErrorMsg("");
+                        }}
+                        className="w-full bg-transparent pl-4 pr-2 py-2 text-xs md:text-sm text-slate-800 outline-none placeholder-slate-400 font-bold"
+                      />
+                      <button
+                        type="submit"
+                        className="rounded-full bg-church-burgundy hover:bg-[#a1232c] px-6 py-3 text-xs font-black uppercase tracking-wider text-white transition-all shadow-neu-flat-sm hover:shadow-neu-flat active:scale-95 whitespace-nowrap border-none cursor-pointer margin-0"
+                      >
+                        Subscribe
+                      </button>
+                    </motion.div>
+                    
+                    <AnimatePresence>
+                      {errorMsg && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -5 }}
+                          className="pl-4 text-[10px] font-mono font-bold text-red-600/90 tracking-wide flex items-center gap-1.5"
+                        >
+                          <span>⚠️</span> {errorMsg}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
                 ) : (
                   <motion.div
@@ -173,10 +207,17 @@ export default function ModernFooter() {
         {/* BOTTOM SUBBAR */}
         <div className="mt-16 pt-8 border-t border-white/30 flex flex-col sm:flex-row items-center justify-between gap-4">
           
-          {/* Copyright left */}
-          <span className="text-[11px] text-slate-500 font-sans font-medium">
-            @2026 Charismatic Evangelicals. All rights reserved.
-          </span>
+          {/* Copyright and Power-by Badging Left */}
+          <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-4 text-center sm:text-left">
+            <span className="text-[11px] text-slate-500 font-sans font-medium">
+              &copy; 2026 Charismatic Evangelicals. All rights reserved.
+            </span>
+            <span className="hidden sm:inline text-slate-300">|</span>
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-[#f4eae2] border border-white/80 px-3 py-1 text-[9px] font-mono font-black tracking-widest text-[#8a1e25]/90 uppercase shadow-neu-flat-sm select-none">
+              <span className="text-slate-500 font-sans font-semibold normal-case">Powered by</span>
+              <span>GraceGate</span>
+            </div>
+          </div>
 
           {/* Accepted Cards Logos Right */}
           <div className="flex flex-wrap items-center gap-2">
