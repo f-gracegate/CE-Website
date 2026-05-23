@@ -1,0 +1,8 @@
+{
+  "apiKey": "DUMMY_API_KEY_PLACEHOLDER_FOR_TIER1",
+  "authDomain": "react-example.firebaseapp.com",
+  "projectId": "react-example",
+  "storageBucket": "react-example.appspot.com",
+  "messagingSenderId": "000000000000",
+  "appId": "1:000000000000:web:0000000000000000000000"
+}

@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-church-burgundy: #8a1e25;      /* primary deep corporate wine red */
+  --color-church-rose: #d2737d;          /* elegant accent rose-pink */
+  --color-church-dark: #1f0b0c;          /* deepest charcoal-burgundy for readability */
+  --color-church-cream: #faf6f6;         /* refined offwhite background grids */
+  --color-church-lightrose: #fbf0f1;     /* high contrast rose canvas backgrounds */
+  
+  /* Legacy alias compatibility mapping to keep overall layout perfectly secure and prevent crash toggles */
+  --color-church-green: #8a1e25;         /* remap action green to primary logo burgundy */
+  --color-church-lime: #d2737d;          /* remap sub-action lime to beautiful rose */
+  --color-church-navy: #ffffff;          /* remap deep dark navigation to stunning clear white */
+  --color-church-slate: #faf6f6;         /* remap background darks to soft warm cream */
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf6f6;
+}
+::-webkit-scrollbar-thumb {
+  background: #d2737d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8a1e25;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1f0b0c;
+  overflow-x: hidden;
+}

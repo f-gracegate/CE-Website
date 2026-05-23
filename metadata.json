@@ -1,0 +1,6 @@
+{
+  "name": "Charismatic Evangelicals",
+  "description": "A bespoke, highly polished church website for Charismatic Evangelicals featuring immersive series showcases, neumorphic glow backdrops, interactive community capsules, and a stylish subscription hub.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
