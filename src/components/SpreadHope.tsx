@@ -291,7 +291,7 @@ export default function SpreadHope() {
   ];
 
   return (
-    <section id="hope-section" className="relative bg-[#f4eae2] py-20 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-b border-white/40">
+    <section id="hope-section" className="relative py-20 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-b border-white/40">
       
       {/* 🟢 BOTTOM LEFT ORNAMENT: Small dot grids */}
       <div className="absolute bottom-[10%] left-[5%] hidden md:grid grid-cols-5 gap-2 opacity-15 pointer-events-none z-0">
@@ -308,12 +308,12 @@ export default function SpreadHope() {
             <div className="relative w-full max-w-sm h-[390px] flex items-center justify-center select-none">
               
               {/* Soft beveled backplate beneath the stack to ground the physical design */}
-              <div className="absolute -left-4 -top-4 w-32 h-32 rounded-[32px] bg-[#f4eae2] border border-white/65 shadow-neu-flat-sm z-0 pointer-events-none" />
+              <div className="absolute -left-4 -top-4 w-32 h-32 rounded-[32px] glass z-0 pointer-events-none" />
               <div className="absolute -right-3 -bottom-3 w-24 h-24 rounded-3xl border border-[#8a1e25]/15 z-0 pointer-events-none" />
 
               {/* CARD 3: Bottom-most card (Slanted nicely to the right) */}
               <div 
-                className="absolute w-full h-[340px] rounded-[32px] bg-[#f4eae2] border border-white/45 p-6 shadow-neu-flat-sm flex flex-col justify-between transform rotate-4 translate-x-3 translate-y-3 z-0 opacity-40 transition-all duration-300 pointer-events-none"
+                className="absolute w-full h-[340px] rounded-[32px] glass p-6 flex flex-col justify-between transform rotate-4 translate-x-3 translate-y-3 z-0 opacity-40 transition-all duration-300 pointer-events-none"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#8a1e25]/60 font-black">
@@ -335,7 +335,7 @@ export default function SpreadHope() {
 
               {/* CARD 2: Middle card (Slanted nicely to the left) */}
               <div 
-                className="absolute w-full h-[340px] rounded-[32px] bg-[#f4eae2] border border-white/55 p-7 shadow-neu-flat flex flex-col justify-between transform -rotate-3 -translate-x-2.5 translate-y-1.5 z-10 opacity-75 transition-all duration-300 pointer-events-none"
+                className="absolute w-full h-[340px] rounded-[32px] glass p-7 flex flex-col justify-between transform -rotate-3 -translate-x-2.5 translate-y-1.5 z-10 opacity-75 transition-all duration-300 pointer-events-none"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#8a1e25]/80 font-black">
@@ -391,7 +391,7 @@ export default function SpreadHope() {
                     rotate: slideDir === "prev" ? 14 : slideDir === "next" ? -14 : 10 
                   }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                  className="absolute w-full h-[340px] rounded-[32px] bg-[#f4eae2] border border-white/75 p-8 shadow-neu-flat flex flex-col justify-between z-20 cursor-grab active:cursor-grabbing relative overflow-hidden"
+                  className="absolute w-full h-[340px] rounded-[32px] glass-strong p-8 flex flex-col justify-between z-20 cursor-grab active:cursor-grabbing relative overflow-hidden"
                 >
                   {/* Absolute watermark reflection highlight */}
                   <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none rounded-t-[32px]" />
@@ -434,12 +434,12 @@ export default function SpreadHope() {
                   setCurrentVerseIndex((prev) => (prev - 1 + totalVerses) % totalVerses);
                 }}
                 aria-label="Previous daily scripture"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4eae2] border border-white/60 text-slate-700 hover:text-[#8a1e25] shadow-neu-flat hover:shadow-neu-inset transition-all active:scale-90 cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center btn-tactile-light text-slate-700 hover:text-[#8a1e25] transition-all active:scale-90 cursor-pointer"
               >
                 <ArrowLeft className="h-4 w-4" />
               </button>
               
-              <div className="flex items-center gap-1 bg-[#f4eae2] px-3.5 py-1.5 rounded-full border border-black/5 text-xs font-semibold text-[#8a1e25]">
+              <div className="flex items-center gap-1 glass px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#8a1e25]">
                 <span>{currentVerseIndex + 1}</span>
                 <span className="text-slate-400">/</span>
                 <span className="text-slate-500">{totalVerses}</span>
@@ -451,7 +451,7 @@ export default function SpreadHope() {
                   setCurrentVerseIndex((prev) => (prev + 1) % totalVerses);
                 }}
                 aria-label="Next daily scripture"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4eae2] border border-white/60 text-slate-700 hover:text-[#8a1e25] shadow-neu-flat hover:shadow-neu-inset transition-all active:scale-90 cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center btn-tactile-light text-slate-700 hover:text-[#8a1e25] transition-all active:scale-90 cursor-pointer"
               >
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -492,16 +492,14 @@ export default function SpreadHope() {
                   return (
                     <div 
                       key={idx}
-                      className={`border border-white/40 bg-[#f4eae2] rounded-2xl overflow-hidden transition-all duration-300 ${
-                        isOpen ? "shadow-neu-inset" : "shadow-neu-flat-sm"
-                      }`}
+                      className={`rounded-2xl overflow-hidden ${isOpen ? "glass-strong" : "glass lift"}`}
                     >
                       <button
                         onClick={() => setActiveOutreachIndex(isOpen ? null : idx)}
                         className="w-full flex items-center justify-between p-4.5 text-left focus:outline-none cursor-pointer"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-xl bg-[#f4eae2] shadow-neu-flat-sm border border-white/50 text-[#8a1e25]">
+                          <div className="p-2 rounded-xl bg-white shadow-neu-flat-sm text-[#8a1e25]">
                             <Icon className="h-4 w-4" />
                           </div>
                           <span className="text-xs md:text-sm font-bold text-slate-900 tracking-tight">

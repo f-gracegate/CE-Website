@@ -32,7 +32,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs"
+            className="fixed inset-0 bg-[#1f0b0c]/35 backdrop-blur-sm"
           />
 
           {/* Modal Container */}
@@ -41,19 +41,16 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: "spring", damping: 25, stiffness: 350 }}
-            className="relative z-10 w-full max-w-lg overflow-hidden rounded-[24px] border border-white/60 bg-[#f4eae2] shadow-neu-flat"
+            className="relative z-10 w-full max-w-lg overflow-hidden rounded-[28px] glass-strong"
           >
-            {/* Top Glow bar */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-church-burgundy via-church-rose to-church-burgundy" />
-
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/30 px-6 py-4">
+            <div className="flex items-center justify-between border-b border-black/5 px-6 py-4">
               <h3 className="font-display text-lg font-bold text-slate-900">
                 {title}
               </h3>
               <button
                 onClick={onClose}
-                className="rounded-xl p-2.5 text-slate-600 bg-[#f4eae2] border border-white/50 hover:text-church-burgundy transition-all shadow-neu-flat-sm active:scale-95 cursor-pointer"
+                className="btn-tactile-light p-2.5 text-slate-600 hover:text-church-burgundy"
                 aria-label="Close modal"
               >
                 <X className="h-4 w-4" />

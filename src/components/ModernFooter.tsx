@@ -37,7 +37,7 @@ export default function ModernFooter() {
   };
 
   return (
-    <footer className="relative bg-[#f4eae2] py-16 px-4 sm:px-6 lg:px-8 font-sans border-t border-white/50">
+    <footer className="relative py-16 px-4 sm:px-6 lg:px-8 font-sans border-t border-white/50">
       
       {/* Footer Container */}
       <div className="mx-auto max-w-7xl">
@@ -86,7 +86,7 @@ export default function ModernFooter() {
                       />
                       <button
                         type="submit"
-                        className="rounded-full bg-church-burgundy hover:bg-[#a1232c] px-6 py-3 text-sm font-semibold text-white transition-colors whitespace-nowrap border-none cursor-pointer margin-0"
+                        className="btn-tactile px-6 py-3 text-sm whitespace-nowrap margin-0"
                       >
                         Subscribe
                       </button>
@@ -109,7 +109,7 @@ export default function ModernFooter() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="flex items-center gap-2.5 rounded-lg bg-white border border-slate-200 p-4 text-church-burgundy text-sm"
+                    className="flex items-center gap-2.5 rounded-2xl glass p-4 text-church-burgundy text-sm"
                   >
                     <CheckCircle className="h-4 w-4 shrink-0 text-church-burgundy" />
                     <span>Thanks, you're subscribed.</span>
@@ -131,7 +131,7 @@ export default function ModernFooter() {
                     key={idx}
                     href="#"
                     aria-label={soc.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 hover:text-church-burgundy transition-colors"
+                    className="flex h-10 w-10 items-center justify-center btn-tactile-light text-slate-700 hover:text-church-burgundy"
                   >
                     <Icon className="h-4 w-4" />
                   </a>

@@ -94,7 +94,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f4eae2] text-slate-800 antialiased selection:bg-church-rose/25 selection:text-church-burgundy leading-normal scroll-smooth">
+    <div className="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-church-rose/25 selection:text-church-burgundy leading-normal scroll-smooth">
       
       {/* FIXED TOP SCROLL PROGRESS INDICATOR */}
       <motion.div
@@ -235,7 +235,7 @@ export default function App() {
               type="text"
               autoFocus
               placeholder="Search, e.g. youth, food kitchen, small groups"
-              className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg pl-10 pr-4 py-2.5 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-church-burgundy focus:ring-1 focus:ring-church-burgundy/20"
+              className="w-full field rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
             />
@@ -248,7 +248,7 @@ export default function App() {
                   key={sidx}
                   href={res.route}
                   onClick={() => setActiveModal(null)}
-                  className="flex items-center justify-between p-3 rounded-lg bg-white border border-rose-100 hover:border-church-burgundy hover:bg-rose-50/20 transition-all text-left group"
+                  className="flex items-center justify-between p-3 rounded-xl glass-strong lift text-left group"
                 >
                   <div>
                     <span className="text-xs text-church-burgundy">
@@ -350,7 +350,7 @@ export default function App() {
                   type="text"
                   required
                   placeholder="e.g. Samuel Francis"
-                  className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-church-burgundy focus:ring-1 focus:ring-church-burgundy/20"
+                  className="w-full field rounded-xl px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400"
                   value={groupName}
                   onChange={(e) => setGroupName(e.target.value)}
                 />
@@ -364,7 +364,7 @@ export default function App() {
                   type="email"
                   required
                   placeholder="e.g. sam@example.com"
-                  className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-church-burgundy focus:ring-1 focus:ring-church-burgundy/20"
+                  className="w-full field rounded-xl px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400"
                   value={groupEmail}
                   onChange={(e) => setGroupEmail(e.target.value)}
                 />
@@ -378,7 +378,7 @@ export default function App() {
                   <select
                     value={groupDay}
                     onChange={(e) => setGroupDay(e.target.value)}
-                    className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2 text-xs text-slate-705 focus:outline-none focus:border-church-burgundy"
+                    className="w-full field rounded-xl px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400"
                   >
                     <option>Tuesday Evening</option>
                     <option>Wednesday Evening</option>
@@ -393,7 +393,7 @@ export default function App() {
                   <select
                     value={selectedLocation}
                     onChange={(e) => setSelectedLocation(e.target.value)}
-                    className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2 text-xs text-slate-705 focus:outline-none focus:border-church-burgundy"
+                    className="w-full field rounded-xl px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400"
                   >
                     <option>All Campuses</option>
                     {CHURCH_LOCATIONS.map((c) => (
@@ -410,7 +410,7 @@ export default function App() {
                 <textarea
                   placeholder="Anything we should know, e.g. you would like a group that welcomes children"
                   rows={2}
-                  className="w-full bg-[#FCFAF9] border border-rose-100/80 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-church-burgundy placeholder-slate-400"
+                  className="w-full field rounded-xl px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400"
                   value={groupRequest}
                   onChange={(e) => setGroupRequest(e.target.value)}
                 />
@@ -418,7 +418,7 @@ export default function App() {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-church-burgundy hover:bg-[#a1232c] py-2.5 text-sm font-semibold text-white transition-colors cursor-pointer mt-2"
+                className="w-full btn-tactile py-3 text-sm mt-2"
               >
                 Send
               </button>
