@@ -18,7 +18,7 @@ const initialPrayers: PrayerRequest[] = [
   {
     id: 'prayer-1',
     author: 'Sister Margaret',
-    request: 'Pray for our upcoming youth conference in South London, that many teens find their calling and community.',
+    request: 'Pray for our upcoming youth conference, that many young people find their calling and community.',
     category: 'Faith',
     createdAt: 'Just now',
     prayingCount: 24,

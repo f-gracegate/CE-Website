@@ -1,64 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { WHO_WE_ARE_TABS } from "../data";
-import { ChevronRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
-
-interface AnimatedCounterProps {
-  value: string;
-  triggerKey?: string;
-}
-
-function AnimatedCounter({ value, triggerKey }: AnimatedCounterProps) {
-  const isPlus = value.endsWith("+");
-  const cleanStr = value.replace(/[^0-9]/g, "");
-  const target = parseInt(cleanStr, 10);
-  
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    if (isNaN(target)) {
-      return;
-    }
-
-    let start = 0;
-    const end = target;
-    const duration = 1600; // 1.6s
-    let startTimestamp: number | null = null;
-
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      
-      // Quadratic ease-out
-      const easeProgress = progress * (2 - progress);
-      const currentVal = Math.floor(easeProgress * (end - start) + start);
-      
-      setCurrent(currentVal);
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-
-    const animFrame = window.requestAnimationFrame(step);
-    
-    return () => {
-      window.cancelAnimationFrame(animFrame);
-      setCurrent(0);
-    };
-  }, [target, triggerKey]);
-
-  if (isNaN(target)) {
-    return <span>{value}</span>;
-  }
-
-  return (
-    <span>
-      {current.toLocaleString()}
-      {isPlus ? "+" : ""}
-    </span>
-  );
-}
 
 export default function WhoWeAre() {
   const [activeTabId, setActiveTabId] = useState("who-we-are");
@@ -108,9 +51,9 @@ export default function WhoWeAre() {
             {/* Behind/Top-Right Image Frame */}
             <motion.div 
               style={{ y: yBehind }}
-              className="relative w-4/5 ml-auto rounded-[28px] bg-[#f4eae2] border border-white/60 p-2.5 shadow-neu-flat z-10"
+              className="relative w-4/5 ml-auto rounded-2xl bg-white p-2 shadow-neu-flat z-10"
             >
-              <div className="relative rounded-[20px] overflow-hidden">
+              <div className="relative rounded-xl overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&h=500&q=80"
                   alt="Charismatic Church Lobby Crowd"
@@ -124,20 +67,17 @@ export default function WhoWeAre() {
             {/* Overlapping Bottom-Left Image Frame */}
             <motion.div 
               style={{ y: yFront }}
-              className="relative w-3/4 mr-auto -mt-20 rounded-[28px] bg-[#f4eae2] border border-white p-2.5 shadow-neu-flat z-20"
+              className="relative w-3/4 mr-auto -mt-20 rounded-2xl bg-white p-2 shadow-neu-flat z-20"
             >
-              <div className="relative rounded-[20px] overflow-hidden">
+              <div className="relative rounded-xl overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=700&h=500&q=80"
-                  alt="Baptism Submersion"
+                  alt="A baptism"
                   className="w-full h-[240px] object-cover"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-rose-950/10 mix-blend-overlay" />
                 {/* Little Water Splash Accent Tag */}
-                <div className="absolute bottom-3 left-3 bg-church-burgundy/95 text-white font-mono text-[9px] font-bold py-1 px-2.5 uppercase rounded-full tracking-widest backdrop-blur-md shadow-md">
-                  Grace Redeemed
-                </div>
               </div>
             </motion.div>
 
@@ -150,16 +90,16 @@ export default function WhoWeAre() {
           <div className="lg:col-span-6 flex flex-col justify-center text-left z-20">
             
             {/* Soft sliding segment selector wrapper */}
-            <div className="flex flex-wrap items-center gap-1.5 bg-[#f4eae2] p-1.5 rounded-full shadow-neu-inset border border-white/40 max-w-max">
+            <div className="flex flex-wrap items-center gap-1.5 bg-black/[0.04] p-1 rounded-full max-w-max">
               {WHO_WE_ARE_TABS.map((tab) => {
                 const isActive = tab.id === activeTabId;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTabId(tab.id)}
-                    className={`px-4.5 py-2.5 rounded-full text-[10px] font-black tracking-widest uppercase transition-all duration-300 cursor-pointer ${
+                    className={`px-4.5 py-2.5 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer ${
                       isActive
-                        ? "bg-[#f4eae2] text-church-burgundy shadow-neu-flat border border-white/60"
+                        ? "bg-white text-church-burgundy shadow-neu-flat-sm"
                         : "text-slate-500 hover:text-slate-800"
                     }`}
                   >
@@ -180,7 +120,7 @@ export default function WhoWeAre() {
                 className="mt-8"
               >
                 {/* Title exactly from data */}
-                <h3 className="font-display text-4xl font-extrabold tracking-tight text-slate-900 uppercase">
+                <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
                   {currentTab.title}
                 </h3>
 
@@ -193,52 +133,13 @@ export default function WhoWeAre() {
                 <div className="mt-6 space-y-3">
                   {currentTab.bullets.map((b, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 max-w-lg">
-                      <div className="flex items-center justify-center p-1 rounded-lg bg-[#f4eae2] shadow-neu-flat-sm border border-white/50 text-[#8a1e25]">
-                        <CheckCircle2 className="h-4 w-4 shrink-0" />
-                      </div>
-                      <span className="text-xs md:text-sm text-slate-700 font-sans font-semibold mt-0.5">
+                      <CheckCircle2 className="h-4 w-4 shrink-0 mt-1 text-[#8a1e25]" />
+                      <span className="text-sm text-slate-700">
                         {b}
                       </span>
                     </div>
                   ))}
                 </div>
-
-                {/* Quick stats panel as individual raised cards */}
-                {currentTab.stats && (
-                  <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-black/5 pt-6">
-                    {currentTab.stats.map((stat, sIdx) => {
-                      const isGlobalReach = stat.label.toLowerCase().includes("global reach");
-                      return (
-                        <motion.div
-                          key={sIdx}
-                          whileHover={{
-                            y: -6,
-                            scale: 1.03,
-                            boxShadow: "14px 14px 28px #e6dad0, -14px -14px 28px #ffffff, 0 0 16px rgba(138, 30, 37, 0.15)",
-                            borderColor: "rgba(138, 30, 37, 0.2)"
-                          }}
-                          transition={{ type: "spring", stiffness: 350, damping: 20 }}
-                          className="flex flex-col items-center justify-center p-4 bg-[#f4eae2] rounded-[20px] border border-white/50 shadow-neu-flat-sm text-center relative overflow-hidden group cursor-default transition-colors duration-300"
-                        >
-                          <span className="font-display text-2xl md:text-3xl font-black text-[#8a1e25] flex items-center gap-0.5">
-                            <AnimatedCounter value={stat.value} triggerKey={activeTabId} />
-                          </span>
-                          <span className="font-mono text-[8px] uppercase tracking-wider text-slate-500 mt-1 select-none font-bold">
-                            {stat.label}
-                          </span>
-                          
-                          {/* Pulsing indicator specifically for Global Reach to heighten tactile interactive premium vibe */}
-                          {isGlobalReach && (
-                            <div className="absolute top-2 right-2 flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8a1e25]/50 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8a1e25]"></span>
-                            </div>
-                          )}
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                )}
 
               </motion.div>
             </AnimatePresence>

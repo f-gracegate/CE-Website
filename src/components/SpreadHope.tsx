@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Heart, Landmark, GraduationCap, Soup, Footprints, ArrowRight, ArrowLeft, BookOpen, Quote, Sparkles } from "lucide-react";
+import { Heart, Landmark, GraduationCap, Soup, Footprints, ArrowRight, ArrowLeft, BookOpen, Quote } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 // Prominent, diverse, and inspiring Bible verses spanning Genesis through Revelation (30 in total)
@@ -7,181 +7,151 @@ const ALL_VERSES = [
   {
     text: "In the beginning, God created the heavens and the earth.",
     ref: "Genesis 1:1",
-    tag: "THE CREATION",
-    sparkle: "🌎"
+    tag: "The creation"
   },
   {
     text: "The Lord will fight for you; you need only to be still.",
     ref: "Exodus 14:14",
-    tag: "DIVINE PROTECTION",
-    sparkle: "🛡️"
+    tag: "Divine protection"
   },
   {
     text: "Be strong and courageous. Do not be afraid or terrified because of them, for the Lord your God goes with you; he will never leave you nor forsake you.",
     ref: "Deuteronomy 31:6",
-    tag: "COURAGE & FAITH",
-    sparkle: "🦁"
+    tag: "Courage & faith"
   },
   {
     text: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
     ref: "Joshua 1:9",
-    tag: "DIVINE STRENGTH",
-    sparkle: "⚡"
+    tag: "Divine strength"
   },
   {
     text: "The Lord is my shepherd, I lack nothing.",
     ref: "Psalm 23:1",
-    tag: "GOOD SHEPHERD",
-    sparkle: "🐑"
+    tag: "Good shepherd"
   },
   {
     text: "God is our refuge and strength, an ever-present help in trouble.",
     ref: "Psalm 46:1",
-    tag: "REFUGE & HELP",
-    sparkle: "🏰"
+    tag: "Refuge & help"
   },
   {
     text: "Your word is a lamp for my feet, a light on my path.",
     ref: "Psalm 119:105",
-    tag: "GUIDANCE & WORD",
-    sparkle: "🕯️"
+    tag: "Guidance & word"
   },
   {
     text: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
     ref: "Proverbs 3:5-6",
-    tag: "TRUST & GUIDANCE",
-    sparkle: "🛤️"
+    tag: "Trust & guidance"
   },
   {
     text: "For to us a child is born, to us a son is given, and the government will be on his shoulders. And he will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace.",
     ref: "Isaiah 9:6",
-    tag: "PRINCE OF PEACE",
-    sparkle: "👑"
+    tag: "Prince of peace"
   },
   {
     text: "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
     ref: "Isaiah 40:31",
-    tag: "RENEWED EAGLES",
-    sparkle: "🦅"
+    tag: "Renewed eagles"
   },
   {
     text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
     ref: "Isaiah 41:10",
-    tag: "UPHOLDING GRACE",
-    sparkle: "✊"
+    tag: "Upholding grace"
   },
   {
     text: "For I know the plans I have for you,' declares the Lord, 'plans to prosper you and not to harm you, plans to give you hope and a future.",
     ref: "Jeremiah 29:11",
-    tag: "FUTURE & HOPE",
-    sparkle: "🌾"
+    tag: "Future & hope"
   },
   {
     text: "Because of the Lord’s great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.",
     ref: "Lamentations 3:22-23",
-    tag: "MORNING MERCY",
-    sparkle: "🌅"
+    tag: "Morning mercy"
   },
   {
     text: "He has shown you, O mortal, what is good. And what does the Lord require of you? To act justly and to love mercy and to walk humbly with your God.",
     ref: "Micah 6:8",
-    tag: "WALK HUMBLY",
-    sparkle: "👣"
+    tag: "Walk humbly"
   },
   {
     text: "But seek first his kingdom and his righteousness, and all these things will be given to you as well.",
     ref: "Matthew 6:33",
-    tag: "SEEK FIRST",
-    sparkle: "💎"
+    tag: "Seek first"
   },
   {
     text: "Come to me, all you who are weary and burdened, and I will give you rest.",
     ref: "Matthew 11:28",
-    tag: "HEAVENLY REST",
-    sparkle: "🍃"
+    tag: "Heavenly rest"
   },
   {
     text: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
     ref: "John 3:16",
-    tag: "ETERNAL LIFE",
-    sparkle: "❤️"
+    tag: "Eternal life"
   },
   {
     text: "Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.",
-    ref: "SURPASSING PEACE",
-    sparkle: "🕊️"
+    ref: "SURPASSING PEACE"
   },
   {
     text: "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
     ref: "Romans 8:28",
-    tag: "PROVIDENCE",
-    sparkle: "🧩"
+    tag: "Providence"
   },
   {
     text: "Do not conform to the pattern of this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what God’s will is—his good, pleasing and perfect will.",
     ref: "Romans 12:2",
-    tag: "TRANSFORMATION",
-    sparkle: "💭"
+    tag: "Transformation"
   },
   {
     text: "May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit.",
     ref: "Romans 15:13",
-    tag: "OVERFLOW HOPE",
-    sparkle: "✨"
+    tag: "Overflow hope"
   },
   {
     text: "And now these three remain: faith, hope and love. But the greatest of these is love.",
     ref: "1 Corinthians 13:13",
-    tag: "GREATEST IS LOVE",
-    sparkle: "💖"
+    tag: "Greatest is love"
   },
   {
     text: "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control. Against such things there is no law.",
     ref: "Galatians 5:22-23",
-    tag: "FRUIT OF SPIRIT",
-    sparkle: "🍎"
+    tag: "Fruit of spirit"
   },
   {
     text: "By grace you have been saved, through faith—and this is not from yourselves, it is the gift of God—not by works, so that no one can boast.",
     ref: "Ephesians 2:8-9",
-    tag: "SAVED BY GRACE",
-    sparkle: "🎁"
+    tag: "Saved by grace"
   },
   {
     text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
     ref: "Philippians 4:6-7",
-    tag: "ANXIOUS TO PEACE",
-    sparkle: "🙏"
+    tag: "Anxious to peace"
   },
   {
     text: "And whatever you do, whether in word or deed, do it all in the name of the Lord Jesus, giving thanks to God the Father through him.",
     ref: "Colossians 3:17",
-    tag: "DO ALL FOR HIM",
-    sparkle: "✍️"
+    tag: "Do all for him"
   },
   {
     text: "Now faith is confidence in what we hope for and assurance about what we do not see.",
     ref: "Hebrews 11:1",
-    tag: "ASSURED FAITH",
-    sparkle: "⚓"
+    tag: "Assured faith"
   },
   {
     text: "If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.",
     ref: "James 1:5",
-    tag: "ASK WISDOM",
-    sparkle: "🎓"
+    tag: "Ask wisdom"
   },
   {
     text: "Cast all your anxiety on him because he cares for you.",
     ref: "1 Peter 5:7",
-    tag: "DIVINE CARE",
-    sparkle: "🎈"
+    tag: "Divine care"
   },
   {
     text: "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain, for the old order of things has passed away.",
     ref: "Revelation 21:4",
-    tag: "NEW CREATION",
-    sparkle: "⛅"
+    tag: "New creation"
   }
 ];
 
@@ -295,26 +265,26 @@ export default function SpreadHope() {
 
   const outreachProjects = [
     {
-      title: "West End Community Soup Kitchen",
-      action: "Serving meals & distributing hygiene kits",
+      title: "Community food kitchen",
+      action: "Serving meals and giving out hygiene kits",
       time: "Saturdays 8:30 AM — 1:00 PM",
-      lead: "Evelyn Jones & Deacon Thomas",
+      lead: "Outreach team",
       icon: Soup,
       color: "border-church-burgundy text-church-burgundy bg-church-burgundy/5"
     },
     {
-      title: "Charismatic Youth Homework Club",
-      action: "Free mentoring and snacks for inner-city teens",
+      title: "Youth homework club",
+      action: "Free tutoring, mentoring and snacks for local teenagers",
       time: "Tuesdays & Thursdays 4:00 PM — 6:30 PM",
-      lead: "Gabriella Silva",
+      lead: "Youth team",
       icon: GraduationCap,
       color: "border-church-rose text-church-rose bg-church-rose/5"
     },
     {
-      title: "Elderly Companionship & Care Walks",
-      action: "Visiting care homes and singing classic hymns",
+      title: "Visiting the elderly",
+      action: "Visiting older members at home and in care, with prayer and hymns",
       time: "Sundays 3:00 PM — 5:00 PM",
-      lead: "Pastor Brenda Campbell",
+      lead: "Care team",
       icon: Footprints,
       color: "border-rose-400 text-rose-500 bg-rose-500/5"
     }
@@ -346,10 +316,9 @@ export default function SpreadHope() {
                 className="absolute w-full h-[340px] rounded-[32px] bg-[#f4eae2] border border-white/45 p-6 shadow-neu-flat-sm flex flex-col justify-between transform rotate-4 translate-x-3 translate-y-3 z-0 opacity-40 transition-all duration-300 pointer-events-none"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[8px] uppercase tracking-widest text-[#8a1e25]/60 font-black">
+                  <span className="text-xs text-[#8a1e25]/60 font-black">
                     {nextNextVerse.tag}
                   </span>
-                  <span className="text-[10px]">{nextNextVerse.sparkle}</span>
                 </div>
                 <div className="my-auto pr-2">
                   <p className="font-serif font-semibold italic text-slate-700/60 text-xs md:text-sm leading-relaxed text-left line-clamp-4">
@@ -357,7 +326,7 @@ export default function SpreadHope() {
                   </p>
                 </div>
                 <div className="flex items-center justify-between border-t border-black/5 pt-3">
-                  <span className="font-mono text-[8px] uppercase tracking-widest text-slate-400 font-bold">
+                  <span className="text-xs text-slate-400 font-bold">
                     {nextNextVerse.ref}
                   </span>
                   <BookOpen className="h-3 w-3 text-[#8a1e25]/30" />
@@ -369,10 +338,9 @@ export default function SpreadHope() {
                 className="absolute w-full h-[340px] rounded-[32px] bg-[#f4eae2] border border-white/55 p-7 shadow-neu-flat flex flex-col justify-between transform -rotate-3 -translate-x-2.5 translate-y-1.5 z-10 opacity-75 transition-all duration-300 pointer-events-none"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[8px] uppercase tracking-widest text-[#8a1e25]/80 font-black">
+                  <span className="text-xs text-[#8a1e25]/80 font-black">
                     {nextVerse.tag}
                   </span>
-                  <span className="text-[10px]">{nextVerse.sparkle}</span>
                 </div>
                 <div className="my-auto pr-2">
                   <p className="font-serif font-semibold italic text-slate-700/80 text-xs md:text-sm leading-relaxed text-left line-clamp-4">
@@ -380,7 +348,7 @@ export default function SpreadHope() {
                   </p>
                 </div>
                 <div className="flex items-center justify-between border-t border-black/5 pt-3.5">
-                  <span className="font-mono text-[8px] uppercase tracking-widest text-slate-500 font-bold">
+                  <span className="text-xs text-slate-500 font-bold">
                     {nextVerse.ref}
                   </span>
                   <BookOpen className="h-3 w-3 text-[#8a1e25]/60" />
@@ -407,8 +375,7 @@ export default function SpreadHope() {
                   whileHover={{ 
                     y: -6,
                     scale: 1.012,
-                    boxShadow: "16px 16px 32px #ccc0b4, -16px -16px 32px #ffffff",
-                    transition: { duration: 0.25, ease: "easeOut" }
+                                        transition: { duration: 0.25, ease: "easeOut" }
                   }}
                   initial={{ 
                     opacity: 0, 
@@ -436,11 +403,7 @@ export default function SpreadHope() {
 
                   {/* Header decoration inside top card */}
                   <div className="flex items-center justify-between relative z-10">
-                    <div className="inline-flex items-center gap-1.5 rounded-full bg-[#f4eae2] border border-white/60 px-3 py-1 text-[8px] font-black tracking-widest text-[#8a1e25] uppercase shadow-neu-flat-sm">
-                      <Sparkles className="h-3 w-3 text-[#8a1e25]" />
-                      <span>{activeVerse.tag}</span>
-                    </div>
-                    <span className="text-xs filter drop-shadow-sm select-none">{activeVerse.sparkle}</span>
+                    <span className="text-xs font-medium text-[#8a1e25]">{activeVerse.tag}</span>
                   </div>
 
                   {/* Main Scripture Text section inside top card */}
@@ -453,13 +416,10 @@ export default function SpreadHope() {
 
                   {/* Footer section inside top card */}
                   <div className="flex items-center justify-between border-t border-black/5 pt-4 relative z-10">
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#8a1e25] font-black">
+                    <span className="text-sm text-[#8a1e25] font-semibold">
                       {activeVerse.ref}
                     </span>
-                    <div className="flex items-center gap-1 text-[8px] font-mono font-bold text-slate-400 font-sans">
-                      <span>SWIPE</span>
-                      <ArrowRight className="h-3 w-3 animate-pulse" />
-                    </div>
+                    <span className="text-xs text-slate-400">Swipe</span>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -479,7 +439,7 @@ export default function SpreadHope() {
                 <ArrowLeft className="h-4 w-4" />
               </button>
               
-              <div className="flex items-center gap-1 bg-[#f4eae2] px-3.5 py-1.5 rounded-full shadow-neu-inset border border-white/30 text-[9px] font-mono font-black text-[#8a1e25] tracking-widest">
+              <div className="flex items-center gap-1 bg-[#f4eae2] px-3.5 py-1.5 rounded-full border border-black/5 text-xs font-semibold text-[#8a1e25]">
                 <span>{currentVerseIndex + 1}</span>
                 <span className="text-slate-400">/</span>
                 <span className="text-slate-500">{totalVerses}</span>
@@ -505,8 +465,8 @@ export default function SpreadHope() {
             <div className="flex items-center gap-4 w-full mb-6 max-w-lg">
               {/* Leading burgundy bar */}
               <div className="h-[3px] bg-church-burgundy rounded-full w-20 opacity-90 hidden sm:block" />
-              <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-900 uppercase shrink-0">
-                spread hope
+              <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-900 shrink-0">
+                Spread hope
               </h2>
             </div>
 
@@ -522,8 +482,8 @@ export default function SpreadHope() {
 
             {/* Interactive Section for outreach engagement */}
             <div className="mt-8 w-full max-w-md">
-              <h4 className="font-mono text-[10px] uppercase tracking-widest text-[#8a1e25] font-extrabold mb-3">
-                JOIN AN OUTREACH INITIATIVE THIS WEEK
+              <h4 className="font-display text-base font-bold text-slate-900 mb-3">
+                Serve with us
               </h4>
               <div className="space-y-4">
                 {outreachProjects.map((proj, idx) => {
@@ -566,8 +526,8 @@ export default function SpreadHope() {
                             <p className="text-xs text-slate-500 font-sans mt-1">
                               <span className="font-bold text-slate-800">When:</span> {proj.time}
                             </p>
-                            <p className="text-xs text-slate-500 font-mono mt-1 text-church-burgundy font-semibold">
-                              Leader: {proj.lead}
+                            <p className="text-xs mt-1 text-church-burgundy font-medium">
+                              Led by the {proj.lead.toLowerCase()}
                             </p>
                           </motion.div>
                         )}

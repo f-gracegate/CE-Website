@@ -1,100 +1,90 @@
 import { ChurchLocation, CommunityMember, ChurchTabContent } from "./types";
 
+// Placeholder campuses (Ghana). Replace with the church's real campuses, times and pastors.
 export const CHURCH_LOCATIONS: ChurchLocation[] = [
   {
-    id: "london-central",
-    name: "London Central (West End)",
-    address: "Great Marylebone St, London W1G 8HU",
-    serviceTimes: ["Sun 9:30 AM", "Sun 11:30 AM", "Sun 6:00 PM (Youth)"],
-    pastor: "Dr. David Shepherd",
+    id: "accra",
+    name: "Accra Campus",
+    address: "Osu, Accra",
+    serviceTimes: ["Sun 8:00 AM", "Sun 10:30 AM", "Wed 6:30 PM (Midweek)"],
+    pastor: "Senior Pastor",
     image: "https://images.unsplash.com/photo-1548625361-155de0c1f25c?auto=format&fit=crop&w=600&q=80"
   },
   {
-    id: "birmingham",
-    name: "Birmingham Campus",
-    address: "St Paul's Square, Birmingham B3 1QY",
-    serviceTimes: ["Sun 10:00 AM", "Sun 12:00 PM"],
-    pastor: "Rev. Marcus & Clara Bell",
+    id: "kumasi",
+    name: "Kumasi Campus",
+    address: "Adum, Kumasi",
+    serviceTimes: ["Sun 9:00 AM", "Fri 6:30 PM (Prayer)"],
+    pastor: "Campus Pastor",
     image: "https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&w=600&q=80"
   },
   {
-    id: "manchester",
-    name: "Manchester Northern Quarter",
-    address: "Newton Street, Manchester M1 1FT",
-    serviceTimes: ["Sun 9:00 AM", "Sun 11:00 AM", "Sun 5:00 PM"],
-    pastor: "Pastor Thomas Wright",
+    id: "tema",
+    name: "Tema Campus",
+    address: "Community 1, Tema",
+    serviceTimes: ["Sun 9:30 AM"],
+    pastor: "Campus Pastor",
     image: "https://images.unsplash.com/photo-1511242300810-9757af26284a?auto=format&fit=crop&w=600&q=80"
   },
   {
-    id: "online-global",
-    name: "Charismatic Online Live",
-    address: "Streaming Worldwide (YouTube & Live App)",
-    serviceTimes: ["Sun 11:30 AM GMT", "Wed 7:30 PM (Midweek Prayer)"],
-    pastor: "Broadcast Team",
+    id: "online",
+    name: "Online",
+    address: "Live on YouTube",
+    serviceTimes: ["Sun 10:30 AM GMT", "Wed 6:30 PM (Midweek)"],
+    pastor: "Media Team",
     image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80"
   }
 ];
 
+
 export const WHO_WE_ARE_TABS: ChurchTabContent[] = [
   {
     id: "who-we-are",
-    label: "WHO WE ARE",
-    title: "who we are",
-    content: "We are a John 14:6 church — a passionate, charismatic evangelical church proclaiming that Jesus Christ is the Way, the Truth, and the Life. Boundlessly transformed by God's radical grace, we love our community with depth, devotion, and high action, so that the world may witness the raw, living power of Christ. We welcome searchers, skeptics, and believers alike to join our diverse modern family.",
+    label: "Who we are",
+    title: "Who we are",
+    content: "We are a charismatic evangelical church built on John 14:6: Jesus Christ is the Way, the Truth and the Life. Changed by God's grace, we love our community and want everyone to experience the living power of Christ. Whether you are searching, unsure or already a believer, you are welcome here.",
     bullets: [
-      "Biblically Grounded: Focused heavily on historical truths and Scripture.",
-      "Spirit-Led: Heartfelt, energetic worship and active spiritual gifts.",
-      "Radical Hospitality: A warm, authentic space where everyone matters."
-    ],
-    stats: [
-      { value: "12,400+", label: "Active Believers" },
-      { value: "14", label: "Local Gatherings" },
-      { value: "48", label: "Global Reach" }
+      "Biblical: our teaching is rooted in Scripture.",
+      "Spirit-led: heartfelt worship and the gifts of the Spirit.",
+      "Welcoming: a warm place where everyone belongs."
     ]
   },
   {
     id: "what-we-do",
-    label: "WHAT WE DO",
-    title: "what we do",
-    content: "We mobilize to love and serve. By creating spaces where modern seekers can encounter the supernatural presence of God, we rebuild spiritual foundations. Our ministries range from passionate, high-fidelity praise, deep corporate intercessory prayer, to responsive youth groups that tackle complex modern issues with biblical clarity, integrity, and warmth.",
+    label: "What we do",
+    title: "What we do",
+    content: "We gather to worship, pray and grow together, and we go out to serve. Our ministries include Sunday worship, prayer meetings, home Bible studies and youth groups that tackle real questions with honesty and care.",
     bullets: [
-      "Dynamic Sunday Gatherings featuring energetic, spirit-stirring worship.",
-      "Interactive midweek prayer groups in over 180 homes.",
-      "Theological courses designed to equip believers to answer hard core questions of faith."
-    ],
-    stats: [
-      { value: "180+", label: "Midweek Circles" },
-      { value: "1,200", label: "Baptisms in 2025" }
+      "Sunday services with lively worship and Bible teaching.",
+      "Midweek prayer and Bible study groups in homes.",
+      "Classes that help believers grow and answer hard questions about faith."
     ]
   },
   {
     id: "get-involved",
-    label: "GET INVOLVED",
-    title: "get involved",
-    content: "Growth happens when we step out of our seats and into community. There are countless avenues to contribute your God-given spiritual strengths and creative gifts in our spiritual home. From worship production, technology setups, friendly welcoming rails, to our intensive local outreach serving groups, you have a vital, unique part to play.",
+    label: "Get involved",
+    title: "Get involved",
+    content: "We grow when we serve. There are many ways to use your gifts here, from music and media to welcoming visitors and outreach in the community. Everyone has a part to play.",
     bullets: [
-      "Welcome Team: Crafting a spectacular, warm first impression.",
-      "Worship & Tech Grid: Creating a highly immersive environment of praise.",
-      "Charismatic Youth: Instilling faith and purpose in the next generation."
-    ],
-    stats: [
-      { value: "4,200+", label: "Active Serving Volunteers" },
-      { value: "30+", label: "Ministry Teams" }
+      "Welcome team: greeting and helping visitors.",
+      "Worship and media: music, sound, cameras and livestream.",
+      "Youth and children: helping young people grow in faith."
     ]
   },
   {
     id: "faq",
     label: "FAQ",
-    title: "frequently asked questions",
-    content: "Whether you are planning your first visit or looking for spiritual clarity on our evangelical theological positions, find quick, clear answers to help guide your steps.",
+    title: "Frequently asked questions",
+    content: "Planning your first visit? Here are answers to common questions.",
     bullets: [
-      "What are your service times? Most locations host morning services at 9:30 AM and 11:30 AM, with evening youth gatherings.",
-      "What should I wear? Dress comfortably! We gather in everything from casual jeans to traditional attire.",
-      "Are children welcome? Yes! Our 'NextGen Kids' programs run simultaneously during all Sunday morning services."
+      "What are your service times? See each campus above. Most have Sunday morning services and a midweek meeting.",
+      "What should I wear? Come as you are, from casual wear to traditional attire.",
+      "Are children welcome? Yes. Children's church runs during Sunday morning services."
     ]
   }
 ];
 
+// Placeholder members and testimonies. Replace with real people (with their permission).
 export const COMMUNITY_MEMBERS: CommunityMember[] = [
   {
     id: "sarah",
@@ -126,8 +116,8 @@ export const COMMUNITY_MEMBERS: CommunityMember[] = [
   {
     id: "pastor-thomas",
     name: "Thomas Wright",
-    role: "Manchester Pastor",
-    testimony: "We are planting lighthouses, not monuments. Seeing the Northern Quarter transform through radical hospitality and intentional discipleship is our greatest victory.",
+    role: "Campus Pastor",
+    testimony: "We are planting lighthouses, not monuments. Seeing our neighbourhood transform through hospitality and intentional discipleship is our greatest victory.",
     bgColor: "bg-rose-500",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=600&q=80",
     height: "h-[320px] md:h-[390px]"
