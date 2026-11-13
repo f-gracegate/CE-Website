@@ -8,7 +8,7 @@ export const CHURCH_LOCATIONS: ChurchLocation[] = [
     address: "Osu, Accra",
     serviceTimes: ["Sun 8:00 AM", "Sun 10:30 AM", "Wed 6:30 PM (Midweek)"],
     pastor: "Senior Pastor",
-    image: "https://images.unsplash.com/photo-1548625361-155de0c1f25c?auto=format&fit=crop&w=600&q=80"
+    image: "/images/ministry-2.webp"
   },
   {
     id: "kumasi",
@@ -16,7 +16,7 @@ export const CHURCH_LOCATIONS: ChurchLocation[] = [
     address: "Adum, Kumasi",
     serviceTimes: ["Sun 9:00 AM", "Fri 6:30 PM (Prayer)"],
     pastor: "Campus Pastor",
-    image: "https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&w=600&q=80"
+    image: "/images/ministry-1.webp"
   },
   {
     id: "tema",
@@ -24,7 +24,7 @@ export const CHURCH_LOCATIONS: ChurchLocation[] = [
     address: "Community 1, Tema",
     serviceTimes: ["Sun 9:30 AM"],
     pastor: "Campus Pastor",
-    image: "https://images.unsplash.com/photo-1511242300810-9757af26284a?auto=format&fit=crop&w=600&q=80"
+    image: "/images/ministry-4.webp"
   },
   {
     id: "online",
@@ -32,7 +32,7 @@ export const CHURCH_LOCATIONS: ChurchLocation[] = [
     address: "Live on YouTube",
     serviceTimes: ["Sun 10:30 AM GMT", "Wed 6:30 PM (Midweek)"],
     pastor: "Media Team",
-    image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80"
+    image: "/images/ministry-3.webp"
   }
 ];
 
