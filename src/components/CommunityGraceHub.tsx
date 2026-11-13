@@ -309,7 +309,7 @@ ${370 + streamLength}
   const [resolvedCampus, setResolvedCampus] = useState<Campus | null>(null);
   const [routingInstructions, setRoutingInstructions] = useState<string[]>([]);
   const [isLocatorSearching, setIsLocatorSearching] = useState(false);
-  const MAPS_KEY = process.env.GOOGLE_MAPS_PLATFORM_KEY || "";
+  const MAPS_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_PLATFORM_KEY || "";
   const hasGmapsKey = Boolean(MAPS_KEY) && MAPS_KEY !== "YOUR_API_KEY";
 
   const handleTrackRadiusCalculations = (e: React.FormEvent) => {
@@ -935,7 +935,7 @@ ${370 + streamLength}
                              Simulated Interactive GIS Active
                           </h4>
                           <p className="text-[10px] text-slate-500 leading-relaxed font-sans">
-                            Enter a postal code above to watch the vector compass calculate route vectors. To see a real satellite map: paste <code>GOOGLE_MAPS_PLATFORM_KEY</code> under <b>Settings &gt; Secrets</b>.
+                            Enter a postal code above to watch the vector compass calculate route vectors. To see a real satellite map: add a <code>NEXT_PUBLIC_GOOGLE_MAPS_PLATFORM_KEY</code> environment variable.
                           </p>
                         </div>
                       </div>
