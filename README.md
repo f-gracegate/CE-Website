@@ -1,20 +1,47 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Charismatic Evangelicals
 
-# Run and deploy your AI Studio app
+Church website built with **Next.js (App Router)**, **React 19**, **Tailwind CSS v4** and **Motion**.
 
-This contains everything you need to run your app locally.
+Features: campus finder with Google Maps, giving calculator, small-group sign-up, a community prayer wall, an AI Sermon Companion (Gemini) and Google sign-in (Firebase).
 
-View your app in AI Studio: https://ai.studio/apps/b434a3a8-2ecc-48cc-a857-15400d517331
+## Getting started
 
-## Run Locally
+**Prerequisites:** Node.js 20+
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+npm run dev
+```
 
+Open http://localhost:3000.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Environment
+
+Copy `.env.example` to `.env.local` and fill in what you need. Every key is optional; features without a key fall back gracefully.
+
+| Variable | Used for |
+| --- | --- |
+| `GEMINI_API_KEY` | Sermon Companion (server-side only) |
+| `NEXT_PUBLIC_GOOGLE_MAPS_PLATFORM_KEY` | Satellite map in the campus finder |
+| `NEXT_PUBLIC_FIREBASE_*` | Real Google sign-in (otherwise a simulated sign-in is used) |
+| `NEXT_PUBLIC_SITE_URL` | Social preview links |
+
+## API routes
+
+| Route | Description |
+| --- | --- |
+| `GET /api/prayers` | List prayer requests |
+| `POST /api/prayers` | Add a prayer request (`author`, `request`, `category`) |
+| `POST /api/prayers/:id/pray` | Increment a prayer's "praying" count |
+| `POST /api/sermon-companion` | Ask the Sermon Companion (`message`) |
+
+Prayer requests are kept in server memory and reset on restart or redeploy. Replace `src/lib/prayers.ts` with a database to keep them.
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm start` | Serve the production build |
+| `npm run lint` | Type-check |

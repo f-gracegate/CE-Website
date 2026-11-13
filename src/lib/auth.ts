@@ -1,3 +1,5 @@
+'use client';
+
 import { initializeApp } from "firebase/app";
 import { 
   getAuth, 
@@ -6,7 +8,15 @@ import {
   onAuthStateChanged, 
   User 
 } from "firebase/auth";
-import firebaseConfig from "../firebase-applet-config.json";
+// Firebase web config comes from environment variables (see .env.example).
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
+};
 
 // We check if it is a dummy config, in which case we will gracefully support a visual simulation/mock sign-in state 
 // so the page never locks the user out of testing the UI before they set up keys!
@@ -20,7 +30,7 @@ const provider = new GoogleAuthProvider();
 provider.addScope("https://www.googleapis.com/auth/calendar.events");
 provider.addScope("https://www.googleapis.com/auth/calendar.readonly");
 
-if (!isMockAuth) {
+if (!isMockAuth && typeof window !== 'undefined') {
   try {
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);

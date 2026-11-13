@@ -80,7 +80,7 @@ const getNextService = (now: Date, locationId: string) => {
 };
 
 interface HeroSectionProps {
-  onOpenModal: (type: "locations" | "login" | "give") => void;
+  onOpenModal: (type: "locations" | "give") => void;
 }
 
 export default function HeroSection({ onOpenModal }: HeroSectionProps) {

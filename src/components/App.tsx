@@ -1,16 +1,18 @@
+'use client';
+
 import React, { useState } from "react";
-import { CHURCH_LOCATIONS } from "./data";
-import { CommunityMember, ChurchLocation } from "./types";
+import { CHURCH_LOCATIONS } from "@/data";
+import { CommunityMember, ChurchLocation } from "@/types";
 import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
-import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
-import WhoWeAre from "./components/WhoWeAre";
-import FindBelonging from "./components/FindBelonging";
-import SpreadHope from "./components/SpreadHope";
-import CommunityCapsules from "./components/CommunityCapsules";
-import ModernFooter from "./components/ModernFooter";
-import Modal from "./components/Modal";
-import CommunityGraceHub from "./components/CommunityGraceHub";
+import Header from "./Header";
+import HeroSection from "./HeroSection";
+import WhoWeAre from "./WhoWeAre";
+import FindBelonging from "./FindBelonging";
+import SpreadHope from "./SpreadHope";
+import CommunityCapsules from "./CommunityCapsules";
+import ModernFooter from "./ModernFooter";
+import Modal from "./Modal";
+import CommunityGraceHub from "./CommunityGraceHub";
 import { 
   Check, 
   MapPin, 
