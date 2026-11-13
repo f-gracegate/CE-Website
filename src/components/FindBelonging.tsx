@@ -106,8 +106,8 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
               <div className="rounded-2xl shadow-neu-flat w-full relative z-10 overflow-hidden">
                 <div className="relative">
                   <img
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&h=550&q=80"
-                    alt="A small group studying the Bible together"
+                    src="/images/40-years-collage.webp"
+                    alt="Young people worshipping together"
                     className="w-full h-[320px] object-cover"
                     referrerPolicy="no-referrer"
                   />

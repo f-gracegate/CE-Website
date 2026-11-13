@@ -55,9 +55,9 @@ export default function WhoWeAre() {
             >
               <div className="relative rounded-xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&h=500&q=80"
-                  alt="Charismatic Church Lobby Crowd"
-                  className="w-full h-[260px] object-cover"
+                  src="/images/youth-camp-kids.webp"
+                  alt="Children at the Students and Youth Camp"
+                  className="w-full h-auto aspect-[12/5] object-cover"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
@@ -67,17 +67,16 @@ export default function WhoWeAre() {
             {/* Overlapping Bottom-Left Image Frame */}
             <motion.div 
               style={{ y: yFront }}
-              className="relative w-3/4 mr-auto -mt-20 rounded-2xl bg-white p-2 shadow-neu-flat z-20"
+              className="relative w-3/5 mr-auto -mt-16 rounded-2xl bg-white p-2 shadow-neu-flat z-20"
             >
               <div className="relative rounded-xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=700&h=500&q=80"
-                  alt="A baptism"
-                  className="w-full h-[240px] object-cover"
+                  src="/images/40-years.webp"
+                  alt="Charismatic Evangelicals: 40 years of rescuing the youth"
+                  className="w-full aspect-square object-cover"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-rose-950/10 mix-blend-overlay" />
-                {/* Little Water Splash Accent Tag */}
+                                {/* Little Water Splash Accent Tag */}
               </div>
             </motion.div>
 

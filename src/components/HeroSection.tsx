@@ -134,19 +134,18 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
             transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <div className="relative overflow-hidden rounded-2xl shadow-neu-flat">
+            <figure className="mx-auto w-full max-w-[380px]">
               <img
-                src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&h=700&q=80"
-                alt="Congregation in worship"
-                referrerPolicy="no-referrer"
-                className="w-full aspect-[16/10] object-cover"
+                src="/images/youth-camp-2026.webp"
+                alt="Youth Camp 2026 flyer: Is there not a Cause? 1 Samuel 17:29b. 19 to 23 December 2026 at Our Lady of Grace Senior High School. Camp fee GH₵150."
+                width={452}
+                height={738}
+                className="w-full h-auto rounded-2xl shadow-neu-flat"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-sm text-white/80">Current series: The Gospel of More</p>
-                <h2 className="font-display mt-1 text-2xl font-bold text-white">Chains Broken by Grace</h2>
-              </div>
-            </div>
+              <figcaption className="mt-4 text-center text-sm text-slate-600">
+                <span className="font-semibold text-slate-900">Youth Camp 2026</span> · 19&ndash;23 December · Our Lady of Grace SHS
+              </figcaption>
+            </figure>
           </motion.div>
         </div>
       </div>
