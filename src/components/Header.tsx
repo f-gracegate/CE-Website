@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { 
-  Flame, 
   ChevronDown, 
   Search, 
-  MapPin, 
-  User, 
-  Heart, 
   Menu, 
   X, 
-  Calendar,
   Layers,
-  FileText,
   Users,
   Compass,
-  Play,
   HeartHandshake
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -37,41 +30,30 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
   };
 
   const menuItems = [
-    { name: "I'M NEW", link: "#", hasDropdown: false },
-    { 
-      name: "ABOUT", 
-      hasDropdown: true, 
+    { name: "I'm new", link: "#who-we-are-section", hasDropdown: false },
+    {
+      name: "About",
+      hasDropdown: true,
       dropdownItems: [
-        { label: "Our Beliefs", desc: "Our core theology and evangelical values", icon: Layers, href: "#who-we-are-section" },
-        { label: "Leadership Core", desc: "Meet our pastors and visionary elders", icon: Users, href: "#community-section" },
-        { label: "Statement of Faith", desc: "Read our historical John 14:6 coordinates", icon: FileText, href: "#who-we-are-section" }
+        { label: "What we believe", desc: "Our beliefs and values", icon: Layers, href: "#who-we-are-section" },
+        { label: "Our people", desc: "Pastors, leaders and members", icon: Users, href: "#community-section" }
       ]
     },
-    { 
-      name: "MEDIA", 
-      hasDropdown: true, 
+    {
+      name: "Get involved",
+      hasDropdown: true,
       dropdownItems: [
-        { label: "Latest Messages", desc: "Archived Sunday sermons and worship clips", icon: Play, href: "#hero-section" },
-        { label: "Resources & Guides", desc: "PDF coordinates for reflection and study", icon: FileText, href: "#who-we-are-section" },
-        { label: "Praise Playlists", desc: "Worship mixes curated by Elijah Graham", icon: Flame, href: "#community-section" }
+        { label: "Small groups", desc: "Midweek groups that meet in homes", icon: Compass, href: "#belonging-section" },
+        { label: "Outreach", desc: "Serve with our community projects", icon: HeartHandshake, href: "#hope-section" }
       ]
     },
-    { 
-      name: "GET INVOLVED", 
-      hasDropdown: true, 
-      dropdownItems: [
-        { label: "Home Groups", desc: "Interactive midweek study & fellowship circles", icon: Compass, href: "#belonging-section" },
-        { label: "Outreach Volunteers", desc: "Spread hope in local feeding projects", icon: HeartHandshake, href: "#hope-section" },
-        { label: "Creative Media Team", desc: "Produce immersive stage lights & imagery", icon: Flame, href: "#hero-section" }
-      ]
-    },
-    { name: "FELLOWSHIP HUB", link: "#grace-hub-section", hasDropdown: false }
+    { name: "Fellowship", link: "#grace-hub-section", hasDropdown: false }
   ];
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 pt-4">
-      <nav className="relative z-40 mx-auto max-w-7xl rounded-[24px] bg-[#f4eae2] border border-white/60 text-slate-800 font-sans shadow-neu-flat">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+      <nav className="relative z-40 mx-auto max-w-7xl rounded-2xl bg-white/80 backdrop-blur border border-black/5 text-slate-800 font-sans shadow-neu-flat">
+        <div className="mx-auto max-w-7xl px-3 sm:px-8">
           <div className="flex h-20 items-center justify-between">
             
             {/* Logo / Brand Name ( Beautiful burgundy/rose symbol and logo from upload ) */}
@@ -86,7 +68,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                   {item.hasDropdown ? (
                     <button
                       onClick={() => toggleDropdown(item.name)}
-                      className={`flex items-center gap-1.5 text-xs font-bold tracking-wider text-slate-700 hover:text-church-burgundy transition-colors uppercase cursor-pointer ${
+                      className={`flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-church-burgundy transition-colors cursor-pointer ${
                         activeDropdown === item.name ? "text-church-burgundy" : ""
                       }`}
                     >
@@ -98,7 +80,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                   ) : (
                     <a
                       href={item.link}
-                      className="text-xs font-bold tracking-wider text-slate-700 hover:text-church-burgundy transition-colors uppercase"
+                      className="text-sm font-medium text-slate-700 hover:text-church-burgundy transition-colors"
                     >
                       {item.name}
                     </a>
@@ -118,7 +100,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute left-1/2 -translate-x-1/2 mt-3 w-80 rounded-[20px] border border-white bg-[#f4eae2] p-3 shadow-neu-flat z-40"
+                          className="absolute left-1/2 -translate-x-1/2 mt-3 w-80 rounded-xl border border-black/5 bg-white p-2 shadow-neu-flat z-40"
                         >
                           <div className="grid gap-1">
                             {item.dropdownItems?.map((drop) => {
@@ -128,13 +110,13 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                                   key={drop.label}
                                   href={drop.href}
                                   onClick={() => setActiveDropdown(null)}
-                                  className="flex items-start gap-3 rounded-xl p-2.5 transition-all hover:bg-white/40"
+                                  className="flex items-start gap-3 rounded-xl p-2.5 transition-all hover:bg-rose-50/60"
                                 >
-                                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/50 text-church-burgundy shadow-neu-flat-sm">
+                                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-rose-50 text-church-burgundy">
                                     <IconComp className="h-4.5 w-4.5" />
                                   </div>
                                   <div>
-                                    <p className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                                    <p className="text-sm font-semibold text-slate-900">
                                       {drop.label}
                                     </p>
                                     <p className="text-[11px] text-slate-500 mt-0.5 leading-normal font-sans">
@@ -167,9 +149,9 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
               {/* Give Filled Button */}
               <button
                 onClick={() => onOpenModal("give")}
-                className="rounded-xl bg-church-burgundy px-5 py-2.5 text-xs font-extrabold tracking-widest text-[#ffffff] hover:bg-[#a0222a] transition-all shadow-[4px_4px_10px_#d3c3b8,-4px_-4px_10px_#ffffff] active:scale-95 cursor-pointer border border-[#8a1e25]"
+                className="rounded-xl bg-church-burgundy px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#6f171d] transition-colors cursor-pointer border border-[#8a1e25]"
               >
-                GIVE
+                Give
               </button>
             </div>
   
@@ -177,9 +159,9 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
             <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={() => onOpenModal("give")}
-                className="rounded-xl bg-church-burgundy px-3.5 py-1.5 text-[11px] font-extrabold tracking-wider text-[#ffffff] hover:bg-[#a0222a] transition-all cursor-pointer shadow-sm"
+                className="rounded-xl bg-church-burgundy px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-[#6f171d] transition-colors cursor-pointer shadow-sm"
               >
-                GIVE
+                Give
               </button>
   
               <button
@@ -212,7 +194,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                   <div key={item.name} className="border-b border-white/30 pb-2">
                     {item.hasDropdown ? (
                       <div>
-                        <p className="text-xs font-extrabold text-church-burgundy tracking-widest py-1 uppercase">
+                        <p className="text-sm font-semibold text-church-burgundy py-1">
                           {item.name}
                         </p>
                         <div className="pl-4 mt-1 space-y-2">
@@ -221,9 +203,9 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                               key={drop.label}
                               href={drop.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className="block text-xs text-slate-650 hover:text-church-burgundy py-1"
+                              className="block text-sm text-slate-600 hover:text-church-burgundy py-1"
                             >
-                              • {drop.label}
+                              {drop.label}
                             </a>
                           ))}
                         </div>
@@ -234,16 +216,19 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                         onClick={() => {
                           setIsMobileMenuOpen(false);
                         }}
-                        className="block text-xs font-bold text-slate-800 hover:text-church-burgundy py-1.5 uppercase tracking-wider"
+                        className="block text-sm font-medium text-slate-800 hover:text-church-burgundy py-1.5"
                       >
                         {item.name}
                       </a>
                     )}
                   </div>
                 ))}
-                <div className="pt-2 text-center text-[10px] text-slate-500 mt-1 font-semibold uppercase tracking-wider">
-                  Active Campus: {selectedLocation}
-                </div>
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); onOpenModal("search"); }}
+                  className="flex items-center gap-2 text-sm font-medium text-slate-800 hover:text-church-burgundy py-1.5"
+                >
+                  <Search className="h-4 w-4" /> Search
+                </button>
               </div>
             </motion.div>
           )}

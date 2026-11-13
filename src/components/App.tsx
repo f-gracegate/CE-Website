@@ -16,14 +16,10 @@ import CommunityGraceHub from "./CommunityGraceHub";
 import { 
   Check, 
   MapPin, 
-  Calendar, 
-  Layers, 
   HandHeart, 
   CheckCircle, 
   Search, 
   ArrowRight,
-  Flame,
-  Plus
 } from "lucide-react";
 
 export default function App() {
@@ -42,16 +38,11 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
-  // Giving calculator state
-  const [givingAmount, setGivingAmount] = useState<number>(50);
-  const [givingCustom, setGivingCustom] = useState("");
-  const [givingFund, setGivingFund] = useState("General Tithes");
-  const [isGiveReceipt, setIsGiveReceipt] = useState(false);
 
   // Group sign up state
   const [groupName, setGroupName] = useState("");
   const [groupEmail, setGroupEmail] = useState("");
-  const [groupDay, setGroupDay] = useState("Thursday");
+  const [groupDay, setGroupDay] = useState("Thursday Evening");
   const [groupRequest, setGroupRequest] = useState("");
   const [groupSubmitted, setGroupSubmitted] = useState(false);
 
@@ -71,7 +62,7 @@ export default function App() {
     
     const index = [
       { category: "Ministry", title: "Charismatic Youth Homework Club", route: "#hope-section", keywords: "youth child homework school studies tutoring and games" },
-      { category: "Outreach", title: "West End Soup Kitchen Charity", route: "#hope-section", keywords: "soup food hungry feed help serve distribute boxes" },
+      { category: "Outreach", title: "Community Food Kitchen", route: "#hope-section", keywords: "soup food hungry feed help serve distribute boxes" },
       { category: "Fellowship", title: "Midweek Home Small Groups", route: "#belonging-section", keywords: "group home table study family circle friends belonging join" },
       { category: "Worship", title: "Latest Sunday Message & Service stream", route: "#hero-section", keywords: "video preach music hymn praise drum guitars Elijah sermon" },
       { category: "Doctrine", title: "Statements of Evangelical Faith", route: "#who-we-are-section", keywords: "bible beliefs john 14 theory values cross Jesus Christ" }
@@ -84,16 +75,6 @@ export default function App() {
     );
     
     setSearchResults(filt);
-  };
-
-  const executeGivingSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsGiveReceipt(true);
-    setTimeout(() => {
-      setIsGiveReceipt(false);
-      setGivingCustom("");
-      setActiveModal(null);
-    }, 6000);
   };
 
   const executeGroupSubmit = (e: React.FormEvent) => {
@@ -166,11 +147,11 @@ export default function App() {
       <Modal
         isOpen={activeModal === "locations"}
         onClose={() => setActiveModal(null)}
-        title="Select Your Church Campus"
+        title="Choose a campus"
       >
         <div className="space-y-4">
           <p className="text-xs text-slate-600 font-sans">
-            Choosing a local campus updates your calendar with neighborhood groups, outreach schedules, and active pastors.
+            Pick the campus nearest to you. Service times and addresses are below.
           </p>
           <div className="grid gap-3 mt-4">
             {CHURCH_LOCATIONS.map((camp) => (
@@ -191,24 +172,22 @@ export default function App() {
                 />
                 <div className="flex-grow">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs md:text-sm font-bold text-slate-900 uppercase tracking-tight">
+                    <h4 className="text-sm font-semibold text-slate-900">
                       {camp.name}
                     </h4>
                     {selectedLocation === camp.name && (
-                      <span className="bg-church-burgundy text-white font-mono text-[7px] font-black tracking-widest px-1.5 py-0.5 rounded">
-                        ACTIVE
-                      </span>
+                      <Check className="h-4 w-4 text-church-burgundy" aria-label="Selected" />
                     )}
                   </div>
                   <p className="text-[10px] text-slate-500 mt-1 flex items-center gap-1">
                     <MapPin className="h-3 w-3 shrink-0 text-church-burgundy" />
                     {camp.address}
                   </p>
-                  <p className="text-[10px] text-church-burgundy mt-1 font-mono tracking-wide font-semibold">
-                    Sunday times: {camp.serviceTimes.join(" | ")}
+                  <p className="text-xs text-church-burgundy mt-1">
+                    {camp.serviceTimes.join(" · ")}
                   </p>
                   <p className="text-[9px] text-slate-500 mt-0.5">
-                    Lead Pastor: <span className="text-slate-800">{camp.pastor}</span>
+                    Led by <span className="text-slate-800">{camp.pastor}</span>
                   </p>
                 </div>
               </button>
@@ -217,137 +196,29 @@ export default function App() {
         </div>
       </Modal>
 
-      {/* 3. DIGITAL GIVING/OFFERING PORTAL MODAL */}
+      {/* Giving */}
       <Modal
         isOpen={activeModal === "give"}
         onClose={() => setActiveModal(null)}
-        title="Evangelical Digital Giving Portal"
+        title="Give"
       >
-        <div className="space-y-4">
-          {!isGiveReceipt ? (
-            <form onSubmit={executeGivingSubmit} className="space-y-4">
-              <p className="text-xs text-slate-600 font-sans leading-relaxed">
-                Thank you for co-funding the mission to spread hope locally & globally. Let's grow God's kingdom together!
-              </p>
-              
-              {/* Preset buttons */}
-              <div>
-                <label className="block text-[9px] uppercase tracking-wider text-slate-500 font-extrabold mb-2">
-                  SELECT Tithe AMOUNT (GBP)
-                </label>
-                <div className="grid grid-cols-4 gap-2">
-                  {[20, 50, 100, 250].map((amt) => {
-                    const isSelected = givingAmount === amt && !givingCustom;
-                    return (
-                      <button
-                        key={amt}
-                        type="button"
-                        onClick={() => {
-                          setGivingAmount(amt);
-                          setGivingCustom("");
-                        }}
-                        className={`py-2 px-1 rounded-lg text-xs font-black tracking-tight border transition-all ${
-                          isSelected
-                            ? "bg-church-burgundy text-white border-transparent shadow shadow-rose-950/20"
-                            : "bg-[#FCFAF9] text-slate-900 border-rose-100 hover:border-church-burgundy/45"
-                        }`}
-                      >
-                        £{amt}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Custom amount */}
-              <div>
-                <label className="block text-[9px] uppercase tracking-wider text-slate-500 font-extrabold mb-1">
-                  OR TYPE CUSTOM AMOUNT
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3.5 top-2.5 text-xs text-slate-400">£</span>
-                  <input
-                    type="number"
-                    min="1"
-                    placeholder="Enter amount"
-                    value={givingCustom}
-                    onChange={(e) => {
-                      setGivingCustom(e.target.value);
-                      setGivingAmount(0);
-                    }}
-                    className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg pl-8 pr-4 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-church-burgundy focus:ring-1 focus:ring-church-burgundy/20"
-                  />
-                </div>
-              </div>
-
-              {/* Fund Selector */}
-              <div>
-                <label className="block text-[9px] uppercase tracking-wider text-slate-500 font-extrabold mb-1">
-                  ALLOCATE TO SPECIFIC MISSION FUND
-                </label>
-                <select
-                  value={givingFund}
-                  onChange={(e) => setGivingFund(e.target.value)}
-                  className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2.5 text-xs text-slate-705 focus:outline-none focus:border-church-burgundy"
-                >
-                  <option>General Ministry & Worship Tithes</option>
-                  <option>West End Community Soup Kitchen</option>
-                  <option>Praise & Stage Multimedia Tech</option>
-                  <option>Charismatic Global Bible Translations</option>
-                  <option>Youth Outreach & Discipleship Gatherings</option>
-                </select>
-              </div>
-
-              {/* Payment Details Form */}
-              <div className="border-t border-rose-100/60 pt-3 space-y-2">
-                <input
-                  type="text"
-                  required
-                  placeholder="Cardholder Full Name"
-                  className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-church-burgundy"
-                />
-                <input
-                  type="text"
-                  required
-                  placeholder="16-Digit Card Number"
-                  className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-church-burgundy"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full rounded-lg bg-church-burgundy hover:bg-[#a1232c] py-3 text-xs font-black text-white transition-all uppercase tracking-widest cursor-pointer mt-2 shadow-sm"
-              >
-                AUTHORIZE DONATION OF £{givingCustom ? givingCustom : givingAmount}
-              </button>
-            </form>
-          ) : (
-            <div className="text-center py-6 space-y-4">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-rose-50 text-church-burgundy border border-rose-100 shadow shadow-rose-950/5">
-                <HandHeart className="h-7 w-7 stroke-[2.2]" />
-              </div>
-              <h4 className="text-slate-900 font-display text-xl font-bold uppercase tracking-tight">
-                Donation Received!
-              </h4>
-              <div className="p-3.5 rounded-lg bg-[#FCFAF9] border border-rose-100/80 max-w-xs mx-auto text-left shadow-2xs">
-                <p className="text-[10px] text-church-burgundy font-mono tracking-wider uppercase mb-1.5 font-bold">
-                  Official Stewardship Receipt
-                </p>
-                <p className="text-xs text-slate-800">
-                  <span className="text-slate-500">Amount Given:</span> £{givingCustom ? givingCustom : givingAmount}.00
-                </p>
-                <p className="text-xs text-slate-800 mt-1">
-                  <span className="text-slate-500">Designation:</span> {givingFund}
-                </p>
-                <p className="text-xs text-slate-800 mt-1">
-                  <span className="text-slate-500">Receipt Stamp:</span> CH-7592B-RE
-                </p>
-              </div>
-              <p className="text-slate-600 text-[11px] leading-relaxed max-w-xs mx-auto font-sans italic">
-                “Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.” — 2 Corinthians 9:7
-              </p>
-            </div>
-          )}
+        <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+          <p>
+            Thank you for supporting the work of the church. Online giving is not available yet.
+          </p>
+          <ul className="space-y-3">
+            <li className="flex gap-3">
+              <HandHeart className="h-5 w-5 shrink-0 text-church-burgundy" />
+              <span><span className="font-semibold text-slate-900">At a service.</span> Give during the offering at any campus.</span>
+            </li>
+            <li className="flex gap-3">
+              <MapPin className="h-5 w-5 shrink-0 text-church-burgundy" />
+              <span><span className="font-semibold text-slate-900">Mobile Money or bank transfer.</span> Ask a campus pastor or the church office for the details.</span>
+            </li>
+          </ul>
+          <p className="border-t border-rose-100 pt-4 text-xs italic text-slate-500">
+            &ldquo;Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.&rdquo; 2 Corinthians 9:7
+          </p>
         </div>
       </Modal>
 
@@ -355,7 +226,7 @@ export default function App() {
       <Modal
         isOpen={activeModal === "search"}
         onClose={() => setActiveModal(null)}
-        title="Search Ministries & Doctrine"
+        title="Search"
       >
         <div className="space-y-4">
           <div className="relative">
@@ -363,7 +234,7 @@ export default function App() {
             <input
               type="text"
               autoFocus
-              placeholder="Search e.g. 'youth', 'soup kitchen', 'baptism', 'study'"
+              placeholder="Search, e.g. youth, food kitchen, small groups"
               className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg pl-10 pr-4 py-2.5 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-church-burgundy focus:ring-1 focus:ring-church-burgundy/20"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
@@ -380,10 +251,10 @@ export default function App() {
                   className="flex items-center justify-between p-3 rounded-lg bg-white border border-rose-100 hover:border-church-burgundy hover:bg-rose-50/20 transition-all text-left group"
                 >
                   <div>
-                    <span className="text-[8px] font-mono font-bold tracking-widest text-church-burgundy uppercase">
+                    <span className="text-xs text-church-burgundy">
                       {res.category}
                     </span>
-                    <h5 className="text-xs font-bold text-slate-900 uppercase tracking-tight mt-0.5 group-hover:text-church-burgundy">
+                    <h5 className="text-sm font-semibold text-slate-900 mt-0.5 group-hover:text-church-burgundy">
                       {res.title}
                     </h5>
                   </div>
@@ -393,13 +264,13 @@ export default function App() {
             ) : (
               searchQuery.trim() && (
                 <div className="text-center text-xs text-slate-500 py-6 font-sans">
-                  No direct evangelical indexes match "{searchQuery}". Try searching general keywords.
+                  Nothing matches &ldquo;{searchQuery}&rdquo;. Try another word.
                 </div>
               )
             )}
             {!searchQuery.trim() && (
               <div className="text-center text-xs text-slate-500 py-4 font-sans">
-                Type keywords to query our live central schedules.
+                Search ministries, groups and outreach.
               </div>
             )}
           </div>
@@ -412,7 +283,7 @@ export default function App() {
           <Modal
             isOpen={selectedMember !== null}
             onClose={() => setSelectedMember(null)}
-            title={`Community Testimony: ${selectedMember.name}`}
+            title={selectedMember.name}
           >
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row gap-5 items-center bg-[#FCFAF9] p-4 rounded-xl border border-rose-100">
@@ -423,15 +294,12 @@ export default function App() {
                   className="h-28 w-28 rounded-full border-2 border-church-burgundy object-cover shrink-0"
                 />
                 <div className="text-center sm:text-left">
-                  <h4 className="font-display text-xl font-extrabold text-slate-900 uppercase tracking-wide">
+                  <h4 className="font-display text-xl font-bold text-slate-900">
                     {selectedMember.name}
                   </h4>
-                  <div className="inline-block mt-1 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-xs font-bold font-mono tracking-wider text-church-burgundy uppercase">
+                  <div className="mt-1 text-sm text-church-burgundy">
                     {selectedMember.role}
                   </div>
-                  <p className="text-[10px] text-slate-500 mt-2 font-mono uppercase tracking-widest font-semibold">
-                    London & Birmingham Circle Affiliated
-                  </p>
                 </div>
               </div>
 
@@ -443,14 +311,14 @@ export default function App() {
                 <span className="absolute -bottom-10 right-2 text-7xl font-serif text-church-rose/20 select-none pointer-events-none">”</span>
               </div>
 
-              <div className="border-t border-rose-100 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[10px] text-slate-500 font-mono tracking-wide">
-                <span>Verified Testimonial Record</span>
+              <div className="border-t border-rose-100 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[10px] text-slate-500">
+                <span />
                 <button
                   onClick={() => {
                      setSelectedMember(null);
                      setActiveModal("groupSignUp");
                   }}
-                  className="text-church-burgundy hover:text-church-rose transition-colors uppercase font-bold flex items-center gap-1 cursor-pointer bg-none border-none outline-none"
+                  className="text-church-burgundy hover:text-church-rose transition-colors font-semibold text-xs flex items-center gap-1 cursor-pointer bg-none border-none outline-none"
                 >
                   <span>Gather with {selectedMember.name.split(" ")[0]}</span>
                   <ArrowRight className="h-3 w-3 stroke-[2.5]" />
@@ -465,18 +333,18 @@ export default function App() {
       <Modal
         isOpen={activeModal === "groupSignUp"}
         onClose={() => setActiveModal(null)}
-        title="Join a Midweek Fellowship Circle"
+        title="Join a small group"
       >
         <div className="space-y-4">
           {!groupSubmitted ? (
             <form onSubmit={executeGroupSubmit} className="space-y-4">
               <p className="text-xs text-slate-600 font-sans leading-relaxed">
-                Welcome home! Tell us your preferences and our Small Group Coordinator will match you with a loving family located right in your neighborhood.
+                Tell us when and where suits you and we will suggest a group near you.
               </p>
               
               <div>
-                <label className="block text-[10px] uppercase tracking-wider text-slate-600 font-bold mb-1">
-                  your full name
+                <label className="block text-xs font-medium text-slate-700 mb-1">
+                  Full name
                 </label>
                 <input
                   type="text"
@@ -489,8 +357,8 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase tracking-wider text-slate-600 font-bold mb-1">
-                  email address
+                <label className="block text-xs font-medium text-slate-700 mb-1">
+                  Email
                 </label>
                 <input
                   type="email"
@@ -504,8 +372,8 @@ export default function App() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] uppercase tracking-wider text-slate-600 font-bold mb-1">
-                    preferred meeting day
+                  <label className="block text-xs font-medium text-slate-700 mb-1">
+                    Preferred day
                   </label>
                   <select
                     value={groupDay}
@@ -514,13 +382,13 @@ export default function App() {
                   >
                     <option>Tuesday Evening</option>
                     <option>Wednesday Evening</option>
-                    <option>Thursday Evening (Primary)</option>
+                    <option>Thursday Evening</option>
                     <option>Saturday Morning</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-wider text-slate-600 font-bold mb-1">
-                    preferred campus
+                  <label className="block text-xs font-medium text-slate-700 mb-1">
+                    Campus
                   </label>
                   <select
                     value={selectedLocation}
@@ -528,20 +396,19 @@ export default function App() {
                     className="w-full bg-[#FCFAF9] border border-rose-100 rounded-lg p-2 text-xs text-slate-705 focus:outline-none focus:border-church-burgundy"
                   >
                     <option>All Campuses</option>
-                    <option>London Central (West End)</option>
-                    <option>Birmingham Campus</option>
-                    <option>Manchester Northern Quarter</option>
-                    <option>Charismatic Online Live</option>
+                    {CHURCH_LOCATIONS.map((c) => (
+                      <option key={c.id}>{c.name}</option>
+                    ))}
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase tracking-wider text-slate-600 font-bold mb-1">
-                  optional prayer requests or notes
+                <label className="block text-xs font-medium text-slate-700 mb-1">
+                  Notes (optional)
                 </label>
                 <textarea
-                  placeholder="Tell us if you would like child-friendly circles, or submit personal prayer intentions so we can welcome you safely..."
+                  placeholder="Anything we should know, e.g. you would like a group that welcomes children"
                   rows={2}
                   className="w-full bg-[#FCFAF9] border border-rose-100/80 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-church-burgundy placeholder-slate-400"
                   value={groupRequest}
@@ -551,9 +418,9 @@ export default function App() {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-church-burgundy hover:bg-[#a1232c] py-2.5 text-xs font-bold text-white transition-all uppercase tracking-widest cursor-pointer mt-2"
+                className="w-full rounded-lg bg-church-burgundy hover:bg-[#a1232c] py-2.5 text-sm font-semibold text-white transition-colors cursor-pointer mt-2"
               >
-                Request Circle Placement
+                Send
               </button>
 
             </form>
@@ -563,14 +430,11 @@ export default function App() {
                 <CheckCircle className="h-6 w-6 stroke-[2.5]" />
               </div>
               <h4 className="text-slate-900 font-display text-lg font-bold">
-                Application Received!
+                Thank you
               </h4>
               <p className="text-slate-650 text-xs font-sans max-w-sm mx-auto leading-relaxed">
-                Thank you <span className="text-church-burgundy font-semibold">{groupName}</span>! Our Small Group placement pastor will email you at <span className="text-slate-800 italic font-semibold">{groupEmail}</span> within 24 hours with exact home coordinates.
+                Thanks, {groupName}. A group leader will contact you at {groupEmail}.
               </p>
-              <div className="text-[10px] text-slate-600 font-mono tracking-wider uppercase mt-2">
-                Preferred day: {groupDay}
-              </div>
             </div>
           )}
         </div>

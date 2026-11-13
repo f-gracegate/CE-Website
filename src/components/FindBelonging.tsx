@@ -62,8 +62,8 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
             
             {/* Header with burgundy bar going left to right (from Screenshot 2) */}
             <motion.div variants={itemVariants} className="flex items-center gap-4 w-full mb-6 max-w-lg">
-              <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-900 uppercase shrink-0">
-                find belonging
+              <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-900 shrink-0">
+                Find belonging
               </h2>
               {/* Burgundy horizontal bar */}
               <div className="h-[3px] bg-church-burgundy rounded-full w-full opacity-90 hidden sm:block" />
@@ -71,19 +71,19 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
 
             {/* Description Copy */}
             <motion.p variants={itemVariants} className="text-sm md:text-base text-slate-600 leading-relaxed font-sans max-w-md">
-              God created us for community, to know and be known by others. In Groups, we pursue 
+              God created us for community, to know and be known by others. In small groups we pursue 
               a relationship with Him, build meaningful connections with others, and compassionately 
-              love and serve our communities. Join a Group today and say hello to your church family.
+              love and serve our communities. Join a group and say hello to your church family.
             </motion.p>
 
             {/* FIND A GROUP Filled Burgundy Button */}
             <motion.button
               variants={itemVariants}
               onClick={onJoinGroup}
-              className="mt-8 group flex items-center gap-2.5 rounded-full bg-[#f4eae2] border border-white/60 px-6 py-3.5 text-xs font-black uppercase tracking-widest text-[#8a1e25] shadow-neu-flat hover:shadow-neu-inset transition-all duration-300 cursor-pointer"
+              className="mt-8 group flex items-center gap-2.5 rounded-lg bg-[#8a1e25] px-6 py-3 text-sm font-semibold text-white hover:bg-[#6f171d] transition-colors cursor-pointer"
             >
-              <Users2 className="h-4 w-4 text-[#8a1e25]" />
-              <span>FIND A GROUP</span>
+              <Users2 className="h-4 w-4" />
+              <span>Find a group</span>
               <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
             </motion.button>
 
@@ -103,11 +103,11 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
               </div>
 
               {/* Group Bible study / couch connection image inside Neumorphic Bezel Frame */}
-              <div className="p-3 rounded-[32px] bg-[#f4eae2] border border-white/60 shadow-neu-flat w-full relative z-10">
-                <div className="relative rounded-[24px] overflow-hidden shadow-inner">
+              <div className="rounded-2xl shadow-neu-flat w-full relative z-10 overflow-hidden">
+                <div className="relative">
                   <img
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&h=550&q=80"
-                    alt="Church Small Group Bible Study Circle"
+                    alt="A small group studying the Bible together"
                     className="w-full h-[320px] object-cover"
                     referrerPolicy="no-referrer"
                   />

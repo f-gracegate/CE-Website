@@ -1,5 +1,14 @@
 import type { Metadata, Viewport } from 'next';
+import { Montserrat, Poppins } from 'next/font/google';
 import './globals.css';
+
+const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-montserrat', display: 'swap' });
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
@@ -19,8 +28,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${montserrat.variable} ${poppins.variable}`}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

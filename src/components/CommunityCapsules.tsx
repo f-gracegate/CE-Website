@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { COMMUNITY_MEMBERS } from "../data";
-import { Sparkles, MessageSquareHeart, Check, Calendar, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { CommunityMember } from "../types";
 
@@ -44,56 +44,35 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
           <div className="lg:col-span-12 xl:col-span-5 text-left flex flex-col items-start z-20">
             
             {/* Round Neon capsule tag */}
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-[#f4eae2] border border-white/60 px-3.5 py-1.5 text-[9px] font-black tracking-widest text-[#8a1e25] uppercase shadow-neu-flat-sm">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>Vibrant Fellowship</span>
-            </div>
 
             {/* Title (Screenshot 5 inspired bold uppercase display) */}
-            <h2 className="mt-6 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 uppercase leading-[0.95] max-w-md">
-              Deep Fellowship Is Just The <br className="hidden sm:inline" />
-              <span className="text-church-burgundy">Beginning</span>
+            <h2 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.05] max-w-md">
+              Fellowship is just <span className="text-church-burgundy">the beginning</span>
             </h2>
 
             {/* Description pitch */}
             <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-sm">
-              We help you build life-changing spiritual habits through interactive home groups, 
-              intimate small gatherings, and dynamic prayer circles where you aren't just a face in the crowd.
+              Small groups and prayer meetings help you grow in faith with people who know you by name, not just a face in the crowd.
             </p>
 
             {/* Two Action buttons styled in Neumorphism */}
             <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button
                 onClick={onJoinGroup}
-                className="rounded-full bg-[#8a1e25] hover:bg-[#a1232c] text-white font-black text-xs tracking-widest px-6 py-4.5 transition-all text-center shadow-[4px_4px_10px_#d3c3b8,-4px_-4px_10px_#ffffff] active:scale-95 cursor-pointer uppercase border border-[#8a1e25]"
+                className="rounded-lg bg-[#8a1e25] hover:bg-[#6f171d] text-white font-semibold text-sm px-6 py-3 transition-colors text-center cursor-pointer"
               >
-                Join a Gathering
+                Join a small group
               </button>
               
               <button
                 onClick={() => {
-                  const el = document.getElementById("hero-section");
+                  const el = document.getElementById("grace-hub-section");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="rounded-full bg-[#f4eae2] border border-white/60 text-church-burgundy hover:text-rose-600 font-black text-xs tracking-widest px-6 py-4.5 transition-all text-center shadow-neu-flat hover:shadow-neu-inset active:scale-95 cursor-pointer uppercase"
+                className="rounded-lg bg-white border border-church-burgundy/30 hover:border-church-burgundy text-church-burgundy font-semibold text-sm px-6 py-3 transition-colors text-center cursor-pointer"
               >
-                Watch Service Live
+                See this week
               </button>
-            </div>
-
-            {/* Quote bubble tag at bottom left with Neumorphic card */}
-            <div className="mt-12 p-4 bg-[#f4eae2] border border-white/60 rounded-[24px] flex items-center gap-3.5 max-w-sm group shadow-neu-flat">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f4eae2] text-church-burgundy border border-white/35 shadow-neu-inset group-hover:scale-105 transition-transform">
-                <MessageSquareHeart className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="text-xs font-extrabold text-[#1f0b0c] tracking-tight">
-                  Over 180 Home Circles Live
-                </p>
-                <p className="text-[11px] text-slate-500 mt-0.5 leading-normal font-sans">
-                  Happening weekly in London, Birmingham, Manchester & Online.
-                </p>
-              </div>
             </div>
 
           </div>
@@ -117,10 +96,8 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
                       onMouseLeave={() => setHoveredMemberId(null)}
                       onClick={() => onOpenTestimony(member)}
                       whileHover={{
-                        y: -14,
-                        scale: 1.06,
-                        boxShadow: "15px 15px 30px #c1b1a6, -15px -15px 30px #ffffff, 0 0 24px rgba(210, 115, 125, 0.45)",
-                      }}
+                        y: -8,
+                                              }}
                       transition={{ type: "spring", stiffness: 300, damping: 22 }}
                       className="relative w-full h-full rounded-full p-1 bg-[#f4eae2] border border-white/45 cursor-pointer group shadow-neu-flat-sm"
                     >
@@ -142,10 +119,10 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
                         {/* Details: Name, role and icon positioned on hover */}
                         <div className="absolute bottom-5 inset-x-2 text-center flex flex-col items-center">
                           <div className="bg-slate-950/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-slate-800/80 mb-1 max-w-[90%] transition-colors duration-300 group-hover:border-[#d2737d]/40">
-                            <p className="text-[10px] sm:text-[11px] font-black text-white tracking-tight truncate">
+                            <p className="text-[10px] sm:text-[11px] font-semibold text-white tracking-tight truncate">
                               {member.name.split(" ")[0]}
                             </p>
-                            <p className="text-[8px] sm:text-[9px] text-[#d2737d] font-mono tracking-wider font-semibold truncate uppercase mt-0.5">
+                            <p className="text-[9px] sm:text-[10px] text-[#f0b4ba] truncate mt-0.5">
                               {member.role}
                             </p>
                           </div>

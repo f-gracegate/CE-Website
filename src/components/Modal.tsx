@@ -48,7 +48,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
             {/* Header */}
             <div className="flex items-center justify-between border-b border-white/30 px-6 py-4">
-              <h3 className="font-display text-sm font-black uppercase tracking-widest text-slate-900">
+              <h3 className="font-display text-lg font-bold text-slate-900">
                 {title}
               </h3>
               <button
