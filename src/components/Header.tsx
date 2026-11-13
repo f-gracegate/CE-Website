@@ -52,7 +52,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 pt-4">
-      <nav className="relative z-40 mx-auto max-w-7xl rounded-2xl bg-white/80 backdrop-blur border border-black/5 text-slate-800 font-sans shadow-neu-flat">
+      <nav className="relative z-40 mx-auto max-w-7xl rounded-full glass text-slate-800 font-sans">
         <div className="mx-auto max-w-7xl px-3 sm:px-8">
           <div className="flex h-20 items-center justify-between">
             
@@ -100,7 +100,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute left-1/2 -translate-x-1/2 mt-3 w-80 rounded-xl border border-black/5 bg-white p-2 shadow-neu-flat z-40"
+                          className="absolute left-1/2 -translate-x-1/2 mt-3 w-80 rounded-2xl glass-strong p-2 z-40"
                         >
                           <div className="grid gap-1">
                             {item.dropdownItems?.map((drop) => {
@@ -140,7 +140,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
               {/* Search Trigger (Neumorphic round button) */}
               <button 
                 onClick={() => onOpenModal("search")}
-                className="p-2.5 rounded-full bg-[#f4eae2] border border-white/50 text-slate-700 hover:text-church-burgundy shadow-neu-flat-sm hover:shadow-neu-inset transition-all duration-300 cursor-pointer"
+                className="btn-tactile-light p-2.5 text-slate-700 hover:text-church-burgundy"
                 aria-label="Search site"
               >
                 <Search className="h-4.5 w-4.5" />
@@ -149,7 +149,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
               {/* Give Filled Button */}
               <button
                 onClick={() => onOpenModal("give")}
-                className="rounded-xl bg-church-burgundy px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#6f171d] transition-colors cursor-pointer border border-[#8a1e25]"
+                className="btn-tactile px-5 py-2.5 text-sm"
               >
                 Give
               </button>
@@ -159,14 +159,14 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
             <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={() => onOpenModal("give")}
-                className="rounded-xl bg-church-burgundy px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-[#6f171d] transition-colors cursor-pointer shadow-sm"
+                className="btn-tactile px-4 py-2 text-sm"
               >
                 Give
               </button>
   
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="rounded-xl p-2.5 bg-[#f4eae2] border border-white/50 text-slate-700 shadow-neu-flat-sm hover:bg-white/40"
+                className="btn-tactile-light p-2.5 text-slate-700"
                 aria-label="Toggle mobile menu"
               >
                 {isMobileMenuOpen ? (
@@ -187,7 +187,7 @@ export default function Header({ onOpenModal, selectedLocation }: HeaderProps) {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden border-t border-white/40 bg-[#f4eae2] rounded-b-[24px] px-6 py-4 shadow-neu-inset"
+              className="lg:hidden border-t border-black/5 px-6 py-4"
             >
               <div className="space-y-3 pb-3">
                 {menuItems.map((item) => (

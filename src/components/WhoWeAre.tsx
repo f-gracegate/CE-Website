@@ -23,7 +23,7 @@ export default function WhoWeAre() {
     <section 
       id="who-we-are-section" 
       ref={sectionRef}
-      className="relative bg-[#f4eae2] py-24 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-t border-white/40"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-t border-white/40"
     >
       
       {/* Decorative Ornaments from Screenshot 1 & 2 */}
@@ -51,7 +51,7 @@ export default function WhoWeAre() {
             {/* Behind/Top-Right Image Frame */}
             <motion.div 
               style={{ y: yBehind }}
-              className="relative w-4/5 ml-auto rounded-2xl bg-white p-2 shadow-neu-flat z-10"
+              className="relative w-4/5 ml-auto rounded-[24px] glass p-2 z-10 lift"
             >
               <div className="relative rounded-xl overflow-hidden">
                 <img
@@ -67,7 +67,7 @@ export default function WhoWeAre() {
             {/* Overlapping Bottom-Left Image Frame */}
             <motion.div 
               style={{ y: yFront }}
-              className="relative w-3/5 mr-auto -mt-16 rounded-2xl bg-white p-2 shadow-neu-flat z-20"
+              className="relative w-3/5 mr-auto -mt-16 rounded-[24px] glass-strong p-2 z-20 lift"
             >
               <div className="relative rounded-xl overflow-hidden">
                 <img
@@ -89,18 +89,15 @@ export default function WhoWeAre() {
           <div className="lg:col-span-6 flex flex-col justify-center text-left z-20">
             
             {/* Soft sliding segment selector wrapper */}
-            <div className="flex flex-wrap items-center gap-1.5 bg-black/[0.04] p-1 rounded-full max-w-max">
+            <div className="segmented">
               {WHO_WE_ARE_TABS.map((tab) => {
                 const isActive = tab.id === activeTabId;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTabId(tab.id)}
-                    className={`px-4.5 py-2.5 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer ${
-                      isActive
-                        ? "bg-white text-church-burgundy shadow-neu-flat-sm"
-                        : "text-slate-500 hover:text-slate-800"
-                    }`}
+                    data-active={isActive}
+                    className={`px-4.5 py-2.5 text-sm font-medium cursor-pointer ${isActive ? "" : "text-slate-500 hover:text-slate-800"}`}
                   >
                     {tab.label}
                   </button>

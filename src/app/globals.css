@@ -22,9 +22,9 @@
   --animate-fade-in: fade-in 0.6s ease-out forwards;
 
   /* Plain card shadows (names kept so existing classes still resolve) */
-  --shadow-neu-flat: 0 1px 2px rgba(31, 11, 12, 0.06), 0 4px 16px rgba(31, 11, 12, 0.06);
-  --shadow-neu-flat-sm: 0 1px 2px rgba(31, 11, 12, 0.08);
-  --shadow-neu-inset: 0 0 0 1px rgba(138, 30, 37, 0.25);
+  --shadow-neu-flat: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(31, 11, 12, 0.05), 0 18px 40px -18px rgba(31, 11, 12, 0.22);
+  --shadow-neu-flat-sm: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(31, 11, 12, 0.06), 0 6px 14px -8px rgba(31, 11, 12, 0.18);
+  --shadow-neu-inset: inset 0 1px 3px rgba(31, 11, 12, 0.12), 0 0 0 1px rgba(138, 30, 37, 0.18);
 }
 
 @keyframes float {
@@ -75,6 +75,134 @@
 
 body {
   background-color: #f4eae2;
+  background-image:
+    radial-gradient(60rem 40rem at 85% -10%, rgba(210, 115, 125, 0.18), transparent 60%),
+    radial-gradient(50rem 36rem at -10% 30%, rgba(138, 30, 37, 0.08), transparent 60%),
+    radial-gradient(40rem 30rem at 100% 80%, rgba(210, 115, 125, 0.12), transparent 60%);
+  background-attachment: fixed;
   color: #1f0b0c;
   overflow-x: hidden;
+}
+
+/* ——— Tactile glass UI ——— */
+@layer components {
+  /* Frosted surface for cards, nav and panels */
+  .glass {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.58));
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow: var(--shadow-neu-flat);
+  }
+  .glass-strong {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.82));
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-neu-flat);
+  }
+
+  /* Raised buttons with a soft top highlight; press sinks them */
+  .btn-tactile,
+  .btn-tactile-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+  }
+  .btn-tactile {
+    color: #fff;
+    background: linear-gradient(180deg, #a3262e 0%, #8a1e25 55%, #761a20 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 1px 2px rgba(31, 11, 12, 0.2), 0 10px 22px -10px rgba(138, 30, 37, 0.7);
+  }
+  .btn-tactile-light {
+    color: #8a1e25;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f1ee 100%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(31, 11, 12, 0.08), 0 8px 18px -10px rgba(31, 11, 12, 0.3);
+  }
+  .btn-tactile:hover,
+  .btn-tactile-light:hover {
+    transform: translateY(-1px);
+  }
+  .btn-tactile:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 4px rgba(31, 11, 12, 0.2), 0 14px 26px -10px rgba(138, 30, 37, 0.75);
+  }
+  .btn-tactile-light:hover {
+    box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(31, 11, 12, 0.08), 0 12px 22px -10px rgba(31, 11, 12, 0.35);
+  }
+  .btn-tactile:active,
+  .btn-tactile-light:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 4px rgba(31, 11, 12, 0.22);
+  }
+  .btn-tactile:focus-visible,
+  .btn-tactile-light:focus-visible,
+  .segmented button:focus-visible {
+    outline: 2px solid rgba(138, 30, 37, 0.45);
+    outline-offset: 2px;
+  }
+
+  /* Segmented control: sunken track, raised active pill */
+  .segmented {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 0.25rem;
+    padding: 0.3rem;
+    border-radius: 9999px;
+    background: rgba(31, 11, 12, 0.05);
+    box-shadow: inset 0 1px 3px rgba(31, 11, 12, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  .segmented::-webkit-scrollbar {
+    display: none;
+  }
+  .segmented button {
+    flex-shrink: 0;
+    white-space: nowrap;
+    border-radius: 9999px;
+    transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  }
+  .segmented [aria-selected="true"],
+  .segmented [data-active="true"] {
+    background: linear-gradient(180deg, #ffffff, #fbf6f4);
+    color: #8a1e25;
+    box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(31, 11, 12, 0.08), 0 6px 14px -8px rgba(31, 11, 12, 0.3);
+  }
+
+  /* Hover lifts the element */
+  .lift {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 4px rgba(31, 11, 12, 0.06), 0 24px 44px -20px rgba(31, 11, 12, 0.3);
+  }
+
+  /* Sunken input field */
+  .field {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(31, 11, 12, 0.08);
+    box-shadow: inset 0 1px 2px rgba(31, 11, 12, 0.08);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .field:focus {
+    outline: none;
+    border-color: rgba(138, 30, 37, 0.5);
+    box-shadow: inset 0 1px 2px rgba(31, 11, 12, 0.08), 0 0 0 3px rgba(138, 30, 37, 0.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift:hover,
+  .btn-tactile:hover,
+  .btn-tactile-light:hover {
+    transform: none;
+  }
 }

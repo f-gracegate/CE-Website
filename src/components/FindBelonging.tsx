@@ -36,7 +36,7 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
   const plusSigns = Array.from({ length: 24 });
 
   return (
-    <section id="belonging-section" className="relative bg-[#f4eae2] py-20 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-t border-white/40">
+    <section id="belonging-section" className="relative py-20 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-t border-white/40">
       
       {/* 💠 TOP LEFT ORNAMENT: Diamond array outlined in brand burgundy */}
       <div className="absolute top-[10%] left-[8%] hidden md:grid grid-cols-6 gap-3 opacity-20">
@@ -80,7 +80,7 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
             <motion.button
               variants={itemVariants}
               onClick={onJoinGroup}
-              className="mt-8 group flex items-center gap-2.5 rounded-lg bg-[#8a1e25] px-6 py-3 text-sm font-semibold text-white hover:bg-[#6f171d] transition-colors cursor-pointer"
+              className="mt-8 group btn-tactile px-6 py-3 text-sm"
             >
               <Users2 className="h-4 w-4" />
               <span>Find a group</span>
@@ -103,7 +103,7 @@ export default function FindBelonging({ onJoinGroup }: FindBelongingProps) {
               </div>
 
               {/* Group Bible study / couch connection image inside Neumorphic Bezel Frame */}
-              <div className="rounded-2xl shadow-neu-flat w-full relative z-10 overflow-hidden">
+              <div className="rounded-[28px] glass p-2 w-full relative z-10 lift">
                 <div className="relative">
                   <img
                     src="/images/40-years-collage.webp"

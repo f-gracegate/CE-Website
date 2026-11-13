@@ -22,7 +22,7 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
   };
 
   return (
-    <section id="community-section" className="relative bg-[#f4eae2] py-24 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-t border-white/40">
+    <section id="community-section" className="relative py-24 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-t border-white/40">
       
       {/* Background radial lighting effects with rose branding */}
       <div className="absolute inset-0 pointer-events-none">
@@ -59,7 +59,7 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
             <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button
                 onClick={onJoinGroup}
-                className="rounded-lg bg-[#8a1e25] hover:bg-[#6f171d] text-white font-semibold text-sm px-6 py-3 transition-colors text-center cursor-pointer"
+                className="btn-tactile text-sm px-6 py-3"
               >
                 Join a small group
               </button>
@@ -69,7 +69,7 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
                   const el = document.getElementById("grace-hub-section");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="rounded-lg bg-white border border-church-burgundy/30 hover:border-church-burgundy text-church-burgundy font-semibold text-sm px-6 py-3 transition-colors text-center cursor-pointer"
+                className="btn-tactile-light text-sm px-6 py-3"
               >
                 See this week
               </button>
@@ -99,7 +99,7 @@ export default function CommunityCapsules({ onJoinGroup, onOpenTestimony }: Comm
                         y: -8,
                                               }}
                       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                      className="relative w-full h-full rounded-full p-1 bg-[#f4eae2] border border-white/45 cursor-pointer group shadow-neu-flat-sm"
+                      className="relative w-full h-full rounded-full p-1 glass cursor-pointer group"
                     >
                       <div className="relative w-full h-full rounded-full overflow-hidden">
                         {/* Background colorful container backing clipping of people */}

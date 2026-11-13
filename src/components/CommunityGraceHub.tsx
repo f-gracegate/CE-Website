@@ -136,10 +136,10 @@ export default function CommunityGraceHub() {
   }, [now]);
 
   const inputCls =
-    "w-full bg-white border border-rose-100 rounded-xl py-2.5 px-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-church-burgundy";
+    "w-full field rounded-xl py-2.5 px-4 text-sm text-slate-800 placeholder-slate-400";
 
   return (
-    <section id="grace-hub-section" className="relative bg-[#f4eae2] border-t border-white/40 py-24 px-4 sm:px-6 lg:px-8 text-slate-800">
+    <section id="grace-hub-section" className="relative border-t border-white/40 py-24 px-4 sm:px-6 lg:px-8 text-slate-800">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl mb-10">
           <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Fellowship</h2>
@@ -148,15 +148,15 @@ export default function CommunityGraceHub() {
           </p>
         </div>
 
-        <div role="tablist" className="flex flex-wrap gap-2 mb-6">
+        <div role="tablist" className="segmented mb-6">
           {TABS.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               role="tab"
               aria-selected={activeTab === id}
               onClick={() => setActiveTab(id)}
-              className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                activeTab === id ? "bg-church-burgundy text-white" : "bg-white text-slate-600 hover:text-church-burgundy"
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium cursor-pointer ${
+                activeTab === id ? "" : "text-slate-600 hover:text-church-burgundy"
               }`}
             >
               <Icon className="h-4 w-4" />
@@ -165,7 +165,7 @@ export default function CommunityGraceHub() {
           ))}
         </div>
 
-        <div className="bg-white/60 border border-white rounded-3xl p-5 md:p-8 min-h-[420px]">
+        <div className="glass rounded-[32px] p-5 md:p-8 min-h-[420px]">
           {/* Prayer wall */}
           {activeTab === "prayer" && (
             <div className="space-y-6">
@@ -180,7 +180,7 @@ export default function CommunityGraceHub() {
                 <button
                   type="submit"
                   disabled={isPrayerSubmitting}
-                  className="bg-church-burgundy hover:bg-[#a1232c] text-white rounded-xl py-2.5 px-5 text-sm font-semibold flex items-center justify-center gap-1.5 disabled:opacity-50"
+                  className="btn-tactile py-2.5 px-5 text-sm disabled:opacity-50"
                 >
                   {isPrayerSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Plus className="h-4 w-4" /> Post</>}
                 </button>
@@ -199,7 +199,7 @@ export default function CommunityGraceHub() {
                   prayers.map((pr) => {
                     const prayed = prayedForIds.includes(pr.id);
                     return (
-                      <div key={pr.id} className="bg-white border border-rose-100 rounded-2xl p-5 flex flex-col justify-between">
+                      <div key={pr.id} className="glass-strong lift rounded-2xl p-5 flex flex-col justify-between">
                         <div>
                           <div className="flex items-center justify-between text-xs">
                             <span className="font-medium text-church-burgundy">{CATEGORY_LABEL[pr.category] ?? pr.category}</span>
